@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -12,4 +12,21 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'ArrowUp') {
+      
+    }
+    if (event.key === 'ArrowDown') {
+      
+    }
+    if (event.key === 'ArrowLeft') {
+
+    }
+    if (event.key === 'ArrowRight') {
+
+    }
+    
+  }
 }
