@@ -42,12 +42,12 @@ export class HomeComponent implements OnInit {
       }
     }
 
-    if (event.key === 'ArrowLeft') {
-      if (this.positionX - this.charWidth > 0) {
-        this.positionX = this.positionX - 20;
-        this.setClass('character', 'characterMove');
-      }
-    }
+    // if (event.key === 'ArrowLeft') {
+    //   if (this.positionX - this.charWidth > 0) {
+    //     this.positionX = this.positionX - 20;
+    //     this.setClass('character', 'characterMove');
+    //   }
+    // }
 
     if (event.key === 'ArrowRight') {
       if (this.positionX < (window.innerWidth - this.charWidth * this.scale) - 20) {
@@ -67,9 +67,9 @@ export class HomeComponent implements OnInit {
       this.setClass('characterMove', 'character');
     }
 
-    if (event.key === 'ArrowLeft') {
-      this.setClass('characterMove', 'character');
-    }
+    // if (event.key === 'ArrowLeft') {
+    //   this.setClass('characterMove', 'character');
+    // }
 
     if (event.key === 'ArrowRight') {
       this.setClass('characterMove', 'character');
