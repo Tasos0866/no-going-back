@@ -6,8 +6,19 @@ import { Component, OnInit, HostListener } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  positionX: number;
+  positionY: number;
+  charWidth: number;
+  charHeight: number;
+  charSpeed: number;
 
-  constructor() { }
+  constructor() {
+    this.charWidth = 50;
+    this.charHeight = 50;
+    this.charSpeed = 20;
+    this.positionX = 0;
+    this.positionY = (window.innerHeight - this.charHeight) / 2;
+  }
 
   ngOnInit() {
   }
@@ -16,16 +27,24 @@ export class HomeComponent implements OnInit {
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.key === 'ArrowUp') {
-      
+      if (this.positionY < (window.innerHeight - this.charHeight) - 20) {
+        this.positionY = this.positionY + 20;
+      }
     }
     if (event.key === 'ArrowDown') {
-      
+      if (this.positionY > 20) {
+        this.positionY = this.positionY - 20;
+      }
     }
     if (event.key === 'ArrowLeft') {
-
+      if (this.positionX > 0) {
+        this.positionX = this.positionX - 20;
+      }
     }
     if (event.key === 'ArrowRight') {
-
+      if (this.positionX < (window.innerWidth - this.charWidth) - 20) {
+        this.positionX = this.positionX + 20;
+      }
     }
     
   }
