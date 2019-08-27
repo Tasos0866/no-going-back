@@ -5,6 +5,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
   positionX: number;
   positionY: number;
@@ -24,7 +25,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   }
-
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -78,7 +78,6 @@ export class HomeComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    event.target.innerWidth;
     if (this.positionX + this.charWidth * this.scale > window.innerWidth) {
       this.positionX = window.innerWidth - this.charWidth * this.scale;
     }
