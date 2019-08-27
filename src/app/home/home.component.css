@@ -1,47 +1,45 @@
 .container {
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: #8a8af3;
 }
 
 .left {
-    width: 100%;
-    height: 100%;
-    background-color: rgb(138, 138, 243);
+  flex: 1;
+  background-color: #8a8af3;
 }
 
 .center {
-    width: 100%;
-    height: 100%;
-    background: url("../../assets/img/road.png");
-    background-size: 100%;
-    animation: animateRoad 200s linear infinite;
+  flex: 10;
+  background: url("../../assets/img/road.svg") repeat-y;
+  background-size: 1600px auto;
 }
 
 .right {
-    width: 100%;
-    height: 100%;
-    background-color: rgb(119, 228, 119);
+  flex: 1;
+  background-color: rgb(119, 228, 119);
 }
 
 .character {
-    background-color: aquamarine;
-    width: 50px;
-    height: 50px;
+  position: absolute;
+  background-color: aquamarine;
+  width: 50px;
+  height: 50px;
 }
 
 @keyframes animateRoads {
-    0% {
-      background-position: 0 0;
-    }
+  0% {
+    background-position: 0 0;
+  }
 
-    100% {
-      background-position: 0px 10000px;
-    }
+  100% {
+    background-position: 0px 10000px;
+  }
   }
 
   /* @keyframes animateTrees {
