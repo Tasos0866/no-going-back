@@ -13,7 +13,7 @@
   position: absolute;
   background: url("../../assets/img/humanoid.png");
   transform: scale(2);
-  background-position: 60px;
+  background-position: 120px;
 }
 
 .characterMove {
