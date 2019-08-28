@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,12 @@ export class HomeComponent implements OnInit {
   charHeight: number;
   charSpeed: number;
   scale: number;
+  minutes: number;
+  seconds: number;
+  miliseconds: number;
+  displayMinutes: string;
+  displaySeconds: string;
+  displayMiliseconds: string;
 
   constructor() {
     this.charWidth = 20;
@@ -21,9 +28,30 @@ export class HomeComponent implements OnInit {
     this.positionX = this.charWidth;
     this.positionY = (window.innerHeight - this.charHeight) / 2;
     this.scale = 2;
+    this.minutes = 0;
+    this.seconds = 0;
+    this.miliseconds = 0;
+    this.displayMinutes = '00';
+    this.displaySeconds = '00';
+    this.displayMiliseconds = '00';
   }
 
   ngOnInit() {
+    // Create an Observable that will publish a value on an interval
+    const secondsCounter = interval(10);
+    // Subscribe to begin publishing values
+    secondsCounter.subscribe(n => {
+        this.miliseconds = (n);
+        this.displayMiliseconds = this.addZero(this.miliseconds % 100);
+        if (this.miliseconds % 100 === 0) {
+          this.seconds = (this.seconds + 1);
+          this.displaySeconds = this.addZero(this.seconds  % 60);
+        }
+        if (this.seconds % 60 === 0 && this.seconds !== 0 && (this.miliseconds + 100) % 6000 === 0) {
+          this.minutes = this.minutes + 1;
+          this.displayMinutes = this.addZero(this.minutes);
+        }
+      });
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -91,5 +119,9 @@ export class HomeComponent implements OnInit {
     if (element.length !== 0) {
       document.getElementsByClassName(currentClass)[0].className = futureClass;
     }
+  }
+
+  addZero(myNumber: number) {
+    return (myNumber < 10 ? '0' : '') + myNumber;
   }
 }
