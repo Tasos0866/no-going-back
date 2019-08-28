@@ -44,8 +44,22 @@
 }
 
 .right {
-  flex: 1;
+  flex: 2;
   background-color: rgb(119, 228, 119);
+}
+
+.time-wrap {
+  position: absolute;
+  width: 200px;
+  font-family: Bangers;
+  letter-spacing: 2px;
+  right: 0;
+}
+
+.timer {
+  display: block;
+  font-size: 40px;
+  color: red;
 }
 
 @media screen and (max-width: 1420px) {
