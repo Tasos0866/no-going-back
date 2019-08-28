@@ -71,7 +71,7 @@
     background-position: center center;
   }
 
-  .time-wrap {
+  .timer-wrap {
     position: absolute;
     width: 180px;
     font-family: Bangers;
@@ -94,7 +94,7 @@
     background-position: center center;
   }
 
-  .time-wrap {
+  .timer-wrap {
     position: absolute;
     width: 145px;
     font-family: Bangers;
@@ -117,7 +117,7 @@
     background-position: center center;
   }
 
-  .time-wrap {
+  .timer-wrap {
     position: absolute;
     width: 155px;
     font-family: Bangers;
@@ -140,7 +140,7 @@
     background-position: center center;
   }
 
-  .time-wrap {
+  .timer-wrap {
     position: absolute;
     width: 130px;
     font-family: Bangers;
@@ -163,7 +163,7 @@
     background-position: center center;
   }
 
-  .time-wrap {
+  .timer-wrap {
     position: absolute;
     width: 100px;
     font-family: Bangers;
@@ -196,7 +196,7 @@
     background-color: rgb(119, 228, 119);
   }
 
-  .time-wrap {
+  .timer-wrap {
     position: absolute;
     width: 85px;
     font-family: Bangers;
