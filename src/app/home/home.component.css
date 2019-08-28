@@ -33,7 +33,7 @@
 }
 
 .left {
-  flex: 1;
+  flex: auto;
   background-color: #8a8af3;
 }
 
@@ -41,10 +41,11 @@
   flex: 10;
   background: url("../../assets/img/road.svg") repeat-y;
   background-size: 1600px auto;
+  background-position: center center;
 }
 
 .right {
-  flex: 2;
+  flex: auto;
   background-color: rgb(119, 228, 119);
 }
 
@@ -62,11 +63,26 @@
   color: red;
 }
 
-@media screen and (max-width: 1420px) {
+@media screen and (max-width: 1430px) {
   .center {
     flex: 10;
     background: url("../../assets/img/road.svg") repeat-y;
     background-size: 1300px auto;
+    background-position: center center;
+  }
+
+  .time-wrap {
+    position: absolute;
+    width: 180px;
+    font-family: Bangers;
+    letter-spacing: 2px;
+    right: 0;
+  }
+
+  .timer {
+    display: block;
+    font-size: 35px;
+    color: red;
   }
 }
 
@@ -75,6 +91,21 @@
     flex: 10;
     background: url("../../assets/img/road.svg") repeat-y;
     background-size: 1000px auto;
+    background-position: center center;
+  }
+
+  .time-wrap {
+    position: absolute;
+    width: 145px;
+    font-family: Bangers;
+    letter-spacing: 2px;
+    right: 0;
+  }
+
+  .timer {
+    display: block;
+    font-size: 28px;
+    color: red;
   }
 }
 
@@ -83,6 +114,21 @@
     flex: 10;
     background: url("../../assets/img/road.svg") repeat-y;
     background-size: 800px auto;
+    background-position: center center;
+  }
+
+  .time-wrap {
+    position: absolute;
+    width: 155px;
+    font-family: Bangers;
+    letter-spacing: 2px;
+    right: 0;
+  }
+
+  .timer {
+    display: block;
+    font-size: 30px;
+    color: red;
   }
 }
 
@@ -91,6 +137,21 @@
     flex: 10;
     background: url("../../assets/img/road.svg") repeat-y;
     background-size: 600px auto;
+    background-position: center center;
+  }
+
+  .time-wrap {
+    position: absolute;
+    width: 130px;
+    font-family: Bangers;
+    letter-spacing: 2px;
+    right: 0;
+  }
+
+  .timer {
+    display: block;
+    font-size: 23px;
+    color: red;
   }
 }
 
@@ -99,6 +160,21 @@
     flex: 10;
     background: url("../../assets/img/road.svg") repeat-y;
     background-size: 500px auto;
+    background-position: center center;
+  }
+
+  .time-wrap {
+    position: absolute;
+    width: 100px;
+    font-family: Bangers;
+    letter-spacing: 2px;
+    right: 0;
+  }
+
+  .timer {
+    display: block;
+    font-size: 17px;
+    color: red;
   }
 }
 
@@ -107,6 +183,7 @@
     flex: 10;
     background: url("../../assets/img/road.svg") repeat-y;
     background-size: 500px auto;
+    background-position: center center;
   }
 
   .left {
@@ -118,6 +195,20 @@
     flex: 0;
     background-color: rgb(119, 228, 119);
   }
+
+  .time-wrap {
+    position: absolute;
+    width: 85px;
+    font-family: Bangers;
+    letter-spacing: 2px;
+    right: 0;
+  }
+
+  .timer {
+    display: block;
+    font-size: 13px;
+    color: red;
+  }
 }
 
 @media screen and (max-width: 370px) {
@@ -125,6 +216,7 @@
     flex: 10;
     background: url("../../assets/img/road.svg") repeat-y;
     background-size: 400px auto;
+    background-position: center center;
   }
 
   .left {
@@ -143,6 +235,7 @@
     flex: 10;
     background: url("../../assets/img/road.svg") repeat-y;
     background-size: 340px auto;
+    background-position: center center;
   }
 
   .left {
@@ -164,7 +257,7 @@
   100% {
     background-position: 0px 10000px;
   }
-  }
+}
 
   /* @keyframes animateTrees {
     0% {
