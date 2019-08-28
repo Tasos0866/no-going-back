@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   displayMinutes: string;
   displaySeconds: string;
   displayMiliseconds: string;
+  subscription: Subscription;
 
   constructor() {
     this.charWidth = 20;
@@ -40,7 +41,7 @@ export class HomeComponent implements OnInit {
     // Create an Observable that will publish a value on an interval
     const secondsCounter = interval(10);
     // Subscribe to begin publishing values
-    secondsCounter.subscribe(n => {
+    this.subscription = secondsCounter.subscribe(n => {
         this.miliseconds = (n);
         this.displayMiliseconds = this.addZero(this.miliseconds % 100);
         if (this.miliseconds % 100 === 0) {
