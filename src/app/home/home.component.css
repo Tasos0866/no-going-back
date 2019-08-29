@@ -157,16 +157,6 @@
 }
 
 @media screen and (max-width: 450px) {
-  .left {
-    flex: 0;
-    background-color: #8a8af3;
-  }
-  
-  .right {
-    flex: 0;
-    background-color: rgb(119, 228, 119);
-  }
-
   .timer-wrap {
     position: absolute;
     width: 85px;
@@ -179,30 +169,6 @@
     display: block;
     font-size: 13px;
     color: red;
-  }
-}
-
-@media screen and (max-width: 370px) {
-  .left {
-    flex: 0;
-    background-color: #8a8af3;
-  }
-  
-  .right {
-    flex: 0;
-    background-color: rgb(119, 228, 119);
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .left {
-    flex: 0;
-    background-color: #8a8af3;
-  }
-  
-  .right {
-    flex: 0;
-    background-color: rgb(119, 228, 119);
   }
 }
 
