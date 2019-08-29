@@ -8,12 +8,20 @@ import { interval, Subscription } from 'rxjs';
 })
 
 export class HomeComponent implements OnInit {
+  // Window
+  initialWidth: number;
+  currentWidth: number;
+  windowWidthRatio: number;
+
+  // Character
   positionX: number;
   positionY: number;
   charWidth: number;
   charHeight: number;
   charSpeed: number;
   scale: number;
+
+  // Timer
   minutes: number;
   seconds: number;
   miliseconds: number;
@@ -22,19 +30,83 @@ export class HomeComponent implements OnInit {
   displayMiliseconds: string;
   subscription: Subscription;
 
+  // ** One car for each lane ** \\
+  // Car at first lane
+  carPositionXat1920: number;
+  carWidthAt1920: number;
+  carHeightAt1920: number;
+  carWidth: number;
+  carHeight: number;
+  carPositionX: number;
+  carPositionY: number;
+
+  // Car at second lane
+  car2PositionXat1920: number;
+  car2WidthAt1920: number;
+  car2HeightAt1920: number;
+  car2Width: number;
+  car2Height: number;
+  car2PositionX: number;
+  car2PositionY: number;
+
+  // Car at third lane
+  car3PositionXat1920: number;
+  car3WidthAt1920: number;
+  car3HeightAt1920: number;
+  car3Width: number;
+  car3Height: number;
+  car3PositionX: number;
+  car3PositionY: number;
+
   constructor() {
+    // Window
+    this.initialWidth = 1920;
+    this.currentWidth = window.innerWidth;
+    this.windowWidthRatio = this.currentWidth / this.initialWidth;
+
+    // Character
     this.charWidth = 20;
     this.charHeight = 32;
     this.charSpeed = 20;
     this.positionX = this.charWidth;
     this.positionY = (window.innerHeight - this.charHeight) / 2;
     this.scale = 2;
+
+    // Timer
     this.minutes = 0;
     this.seconds = 0;
     this.miliseconds = 0;
     this.displayMinutes = '00';
     this.displaySeconds = '00';
     this.displayMiliseconds = '00';
+
+    // One car for each lane
+    // Car at first lane
+    this.carPositionXat1920 = 600;
+    this.carWidthAt1920 = 95;
+    this.carHeightAt1920 = 184;
+    this.carWidth = this.carWidthAt1920 * this.windowWidthRatio;
+    this.carHeight = this.carHeightAt1920 * this.windowWidthRatio;
+    this.carPositionX = this.carPositionXat1920 * this.windowWidthRatio - (this.carWidth / 2);
+    this.carPositionY = 400;
+
+    // Car at second lane
+    this.car2PositionXat1920 = 800;
+    this.car2WidthAt1920 = 95;
+    this.car2HeightAt1920 = 184;
+    this.car2Width = this.car2WidthAt1920 * this.windowWidthRatio;
+    this.car2Height = this.car2HeightAt1920 * this.windowWidthRatio;
+    this.car2PositionX = this.car2PositionXat1920 * this.windowWidthRatio - (this.car2Width / 2);
+    this.car2PositionY = 400;
+
+    // Car at third lane
+    this.car3PositionXat1920 = 1000;
+    this.car3WidthAt1920 = 95;
+    this.car3HeightAt1920 = 191;
+    this.car3Width = this.car3WidthAt1920 * this.windowWidthRatio;
+    this.car3Height = this.car3HeightAt1920 * this.windowWidthRatio;
+    this.car3PositionX = this.car3PositionXat1920 * this.windowWidthRatio - (this.car3Width / 2);
+    this.car3PositionY = 400;
   }
 
   ngOnInit() {
@@ -53,6 +125,7 @@ export class HomeComponent implements OnInit {
           this.displayMinutes = this.addZero(this.minutes);
         }
       });
+    this.subscription.unsubscribe();
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -107,12 +180,33 @@ export class HomeComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
+    // Get the screen width ratio
+    this.currentWidth = window.innerWidth;
+    this.windowWidthRatio = this.currentWidth / this.initialWidth;
+
+    // Keep the character inside the window
     if (this.positionX + this.charWidth * this.scale > window.innerWidth) {
       this.positionX = window.innerWidth - this.charWidth * this.scale;
     }
     if (this.positionY + this.charHeight * this.scale > window.innerHeight) {
       this.positionY = window.innerHeight - this.charHeight * this.scale;
     }
+
+    // ** Keep the cars inside the road  ** \\
+    // The car in the first lane
+    this.carWidth = this.carWidthAt1920 * this.windowWidthRatio;
+    this.carHeight = this.carHeightAt1920 * this.windowWidthRatio;
+    this.carPositionX = (this.carPositionXat1920 * this.windowWidthRatio) - (this.carWidth / 2);
+
+    // The car in the second lane
+    this.car2Width = this.car2WidthAt1920 * this.windowWidthRatio;
+    this.car2Height = this.car2HeightAt1920 * this.windowWidthRatio;
+    this.car2PositionX = (this.car2PositionXat1920 * this.windowWidthRatio) - (this.car2Width / 2);
+
+    // The car in the third lane
+    this.car3Width = this.car3WidthAt1920 * this.windowWidthRatio;
+    this.car3Height = this.car3HeightAt1920 * this.windowWidthRatio;
+    this.car3PositionX = (this.car3PositionXat1920 * this.windowWidthRatio) - (this.car3Width / 2);
   }
 
   setClass(currentClass: string, futureClass: string) {

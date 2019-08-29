@@ -5,7 +5,26 @@
     [style.left.px]="positionX"
     [style.bottom.px]="positionY"></div>
     <div class="left"></div>
-    <div class="center"></div>
+    <div class="center">
+        <div class="car1"
+            [style.width.px]="carWidth"
+            [style.height.px]="carHeight"
+            [style.left.px]="carPositionX"
+            [style.bottom.px]="carPositionY">
+        </div>
+        <div class="car2"
+            [style.width.px]="car2Width"
+            [style.height.px]="car2Height"
+            [style.left.px]="car2PositionX"
+            [style.bottom.px]="car2PositionY">
+        </div> 
+        <div class="car3"
+            [style.width.px]="car3Width"
+            [style.height.px]="car3Height"
+            [style.left.px]="car3PositionX"
+            [style.bottom.px]="car3PositionY">
+        </div>
+    </div>
     <div class="right">
         <div class='timer-wrap'>
             <span class="timer">{{displayMinutes}} : {{ displaySeconds }} : {{displayMiliseconds}}</span>

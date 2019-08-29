@@ -6,6 +6,7 @@
   height: 100%;
   left: 0;
   top: 0;
+  z-index: -2;
 }
 
 .character {
@@ -13,7 +14,7 @@
   background: url("../../assets/img/humanoid.png");
   transform: scale(2);
   background-position: 120px;
-  z-index: 0;
+  z-index: -1;
 }
 
 .characterMove {
@@ -35,6 +36,7 @@
 .left {
   flex: auto;
   background-color: #8a8af3;
+  z-index: inherit;
 }
 
 .center {
@@ -43,7 +45,7 @@
   background-size: 101% auto;
   background-position: center center;
   position: relative;
-  z-index: -1;
+  z-index: inherit;
 }
 
 .center:before {
@@ -60,6 +62,7 @@
 .right {
   flex: auto;
   background-color: #77e477;
+  z-index: inherit;
 }
 
 .timer-wrap {
@@ -68,6 +71,27 @@
   font-family: Bangers;
   letter-spacing: 2px;
   right: 0;
+}
+
+.car1 {
+  position: absolute;
+  background-image: url(../../assets/img/car1.svg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+.car2 {
+  position: absolute;
+  background-image: url(../../assets/img/car2.svg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+.car3 {
+  position: absolute;
+  background-image: url(../../assets/img/lambo.svg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
 }
 
 .timer {
