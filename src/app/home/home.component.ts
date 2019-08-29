@@ -184,13 +184,9 @@ export class HomeComponent implements OnInit {
     this.currentWidth = window.innerWidth;
     this.windowWidthRatio = this.currentWidth / this.initialWidth;
 
-    // Keep the character inside the window
-    if (this.positionX + this.charWidth * this.scale > window.innerWidth) {
-      this.positionX = window.innerWidth - this.charWidth * this.scale;
-    }
-    if (this.positionY + this.charHeight * this.scale > window.innerHeight) {
-      this.positionY = window.innerHeight - this.charHeight * this.scale;
-    }
+    // Move character to initial position if the window is resized [anticheat]
+    this.positionX = this.charWidth * this.scale;
+    this.positionY = (window.innerHeight - this.charHeight) / 2;
 
     // ** Keep the cars inside the road  ** \\
     // The car in the first lane
