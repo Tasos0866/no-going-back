@@ -11,16 +11,14 @@
 
 .character {
   position: absolute;
-  background: url("../../assets/img/humanoid.png");
-  transform: scale(2);
-  background-position: 120px;
+  background: url("../../assets/img/character.png");
+  background-position: 300px;
   z-index: -1;
 }
 
 .characterMove {
   position: absolute;
-  background: url("../../assets/img/humanoid.png");
-  transform: scale(2);
+  background: url("../../assets/img/character.png");
   animation: animateCharacter 1s steps(8) infinite;
 }
 
@@ -29,7 +27,7 @@
     background-position: 0;
   }
   to {
-    background-position: -160px;
+    background-position: -399px;
   }
 }
 

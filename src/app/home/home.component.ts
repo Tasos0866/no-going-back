@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
   charWidth: number;
   charHeight: number;
   charSpeed: number;
-  scale: number;
 
   // Timer
   minutes: number;
@@ -65,12 +64,11 @@ export class HomeComponent implements OnInit {
     this.windowWidthRatio = this.currentWidth / this.initialWidth;
 
     // Character
-    this.charWidth = 20;
-    this.charHeight = 32;
+    this.charWidth = 49;
+    this.charHeight = 80;
     this.charSpeed = 20;
-    this.positionX = this.charWidth;
+    this.positionX = 10;
     this.positionY = (window.innerHeight - this.charHeight) / 2;
-    this.scale = 2;
 
     // Timer
     this.minutes = 0;
@@ -131,14 +129,14 @@ export class HomeComponent implements OnInit {
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.key === 'ArrowUp') {
-      if (this.positionY < (window.innerHeight - this.charHeight * this.scale) - 20) {
+      if (this.positionY < (window.innerHeight - this.charHeight) - 20) {
         this.positionY = this.positionY + 20;
         this.setClass('character', 'characterMove');
       }
     }
 
     if (event.key === 'ArrowDown') {
-      if (this.positionY > 20 + this.charHeight) {
+      if (this.positionY > 20) {
         this.positionY = this.positionY - 20;
         this.setClass('character', 'characterMove');
       }
@@ -152,7 +150,7 @@ export class HomeComponent implements OnInit {
     // }
 
     if (event.key === 'ArrowRight') {
-      if (this.positionX < (window.innerWidth - this.charWidth * this.scale) - 20) {
+      if (this.positionX < (window.innerWidth - this.charWidth) - 20) {
         this.positionX = this.positionX + 20;
         this.setClass('character', 'characterMove');
       }
@@ -185,7 +183,7 @@ export class HomeComponent implements OnInit {
     this.windowWidthRatio = this.currentWidth / this.initialWidth;
 
     // Move character to initial position if the window is resized [anticheat]
-    this.positionX = this.charWidth * this.scale;
+    this.positionX = 10;
     this.positionY = (window.innerHeight - this.charHeight) / 2;
 
     // ** Keep the cars inside the road  ** \\
