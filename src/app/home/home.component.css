@@ -17,8 +17,6 @@
   letter-spacing: 2px;
   background-color: orange;
   text-align: center;
-  animation: respawnBlink 1s 1 forwards;
-  animation-delay: 1.5s;
 }
 
 .respawn-text {
@@ -67,18 +65,6 @@
   }
   to {
     background-position: -160px;
-  }
-}
-
-@keyframes respawnBlink {
-  0% {
-    opacity: 1;
-  }
-  99% {
-    opacity: 0;
-  }
-  100% {
-    visibility: hidden;
   }
 }
 
@@ -350,12 +336,3 @@
     background-position: 0px 10000px;
   }
 }
-
-  /* @keyframes animateTrees {
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: 0px 10000px;
-    }
-  } */

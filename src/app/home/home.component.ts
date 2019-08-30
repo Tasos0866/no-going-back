@@ -12,6 +12,8 @@ export class HomeComponent implements OnInit {
   initialWidth: number;
   currentWidth: number;
   windowWidthRatio: number;
+  gameSubscription: Subscription;
+  roadPositionLeft: number;
 
   // Character
   positionX: number;
@@ -65,6 +67,7 @@ export class HomeComponent implements OnInit {
     this.initialWidth = 1920;
     this.currentWidth = window.innerWidth;
     this.windowWidthRatio = this.currentWidth / this.initialWidth;
+    this.roadPositionLeft = 0;
 
     // Character
     this.charWidth = 49;
@@ -120,6 +123,7 @@ export class HomeComponent implements OnInit {
       this.charHeight = 32;
       this.setClass('character-big', 'character-small');
     }
+    this.roadPositionLeft = this.getRoadOffsetLeft();
 
     // Create an Observable that will publish a value on an interval
     const secondsCounter = interval(10);
@@ -138,6 +142,40 @@ export class HomeComponent implements OnInit {
       }
       });
     this.timerSubscription.unsubscribe();
+
+    // Create an observable that will publish any value that is relevant to gameplay
+    const gameInterval = interval(33);  // 30fps
+
+    // Subscribe to begin publishing values
+    this.timerSubscription = gameInterval.subscribe(n => {
+      
+      // If the character and car1 are in the same y position
+      if (this.positionY + this.charHeight > this.carPositionY &&
+          this.positionY < this.carPositionY + this.carHeight) {
+        // Check for collision in the x axes
+        if (this.checkCollisionX()) {
+          this.collisionConsequences();
+        }
+      }
+
+      // If the character and car2 are in the same y position
+      if (this.positionY + this.charHeight > this.car2PositionY &&
+          this.positionY < this.car2PositionY + this.car2Height) {
+        // Check for collision in the x axes
+        if (this.checkCollisionX()) {
+          this.collisionConsequences();
+        }
+      }
+
+      // If the character and car3 are in the same y position
+      if (this.positionY + this.charHeight > this.car3PositionY &&
+          this.positionY < this.car3PositionY + this.car3Height) {
+        // Check for collision in the x axes
+        if (this.checkCollisionX()) {
+          this.collisionConsequences();
+        }
+      }
+    });
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -191,6 +229,9 @@ export class HomeComponent implements OnInit {
     this.currentWidth = window.innerWidth;
     this.windowWidthRatio = this.currentWidth / this.initialWidth;
 
+    // Get the distance from the start of the screen to the road div
+    this.roadPositionLeft = this.getRoadOffsetLeft();
+
     // Move character to initial position if the window is resized [anticheat]
     this.positionX = 10;
     this.positionY = (window.innerHeight - this.charHeight) / 2;
@@ -232,5 +273,42 @@ export class HomeComponent implements OnInit {
 
   addZero(myNumber: number) {
     return (myNumber < 10 ? '0' : '') + myNumber;
+  }
+
+  checkCollisionX() {
+    if(this.positionX + this.charWidth - 10 > this.carPositionX + this.roadPositionLeft &&
+      this.positionX < this.carPositionX + this.roadPositionLeft + this.carWidth) {
+      return true;
+    }
+
+    if(this.positionX + this.charWidth - 10 > this.car2PositionX + this.roadPositionLeft &&
+      this.positionX < this.car2PositionX + this.roadPositionLeft + this.car2Width) {
+      return true;
+    }
+
+    if(this.positionX + this.charWidth - 10 > this.car3PositionX + this.roadPositionLeft &&
+      this.positionX < this.car3PositionX + this.roadPositionLeft + this.car3Width) {
+      return true;
+    }
+    return false;
+  }
+
+  collisionConsequences() {
+    // Send character to initial position
+    this.positionX = 10;
+    this.positionY = this.positionY = (window.innerHeight - this.charHeight) / 2;
+
+    // Display respawn message
+    this.hasRespawnedVisibility = 'visible';
+
+    // Hide respawn message after 3 seconds
+    setTimeout(() => {
+      this.hasRespawnedVisibility = 'hidden';
+    }, 3000);
+  }
+
+  getRoadOffsetLeft() {
+    let center = document.getElementsByClassName('center')[0];
+    return center.offsetLeft;
   }
 }
