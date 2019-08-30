@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   displayMinutes: string;
   displaySeconds: string;
   displayMiliseconds: string;
-  subscription: Subscription;
+  timerSubscription: Subscription;
 
   // ** One car for each lane ** \\
   // Car at first lane
@@ -123,20 +123,21 @@ export class HomeComponent implements OnInit {
 
     // Create an Observable that will publish a value on an interval
     const secondsCounter = interval(10);
+
     // Subscribe to begin publishing values
-    this.subscription = secondsCounter.subscribe(n => {
-        this.miliseconds = (n);
-        this.displayMiliseconds = this.addZero(this.miliseconds % 100);
-        if (this.miliseconds % 100 === 0) {
-          this.seconds = (this.seconds + 1);
-          this.displaySeconds = this.addZero(this.seconds  % 60);
-        }
-        if (this.seconds % 60 === 0 && this.seconds !== 0 && (this.miliseconds + 100) % 6000 === 0) {
-          this.minutes = this.minutes + 1;
-          this.displayMinutes = this.addZero(this.minutes);
-        }
+    this.timerSubscription = secondsCounter.subscribe(n => {
+      this.miliseconds = (n);
+      this.displayMiliseconds = this.addZero(this.miliseconds % 100);
+      if (this.miliseconds % 100 === 0) {
+        this.seconds = (this.seconds + 1);
+        this.displaySeconds = this.addZero(this.seconds  % 60);
+      }
+      if (this.seconds % 60 === 0 && this.seconds !== 0 && (this.miliseconds + 100) % 6000 === 0) {
+        this.minutes = this.minutes + 1;
+        this.displayMinutes = this.addZero(this.minutes);
+      }
       });
-    this.subscription.unsubscribe();
+    this.timerSubscription.unsubscribe();
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -156,14 +157,6 @@ export class HomeComponent implements OnInit {
         this.setClass('character-small', 'character-small-move');
       }
     }
-
-    // if (event.key === 'ArrowLeft') {
-    //   if (this.positionX - this.charWidth > 0) {
-    //     this.positionX = this.positionX - 20;
-    //     this.setClass('character-big', 'character-big-move');
-    //     this.setClass('character-small', 'character-small-move');
-    //   }
-    // }
 
     if (event.key === 'ArrowRight') {
       if (this.positionX < (window.innerWidth - this.charWidth) - 20) {
@@ -185,11 +178,6 @@ export class HomeComponent implements OnInit {
       this.setClass('character-big-move', 'character-big');
       this.setClass('character-small-move', 'character-small');
     }
-
-    // if (event.key === 'ArrowLeft') {
-    //   this.setClass('character-big-move', 'character-big');
-    //   this.setClass('character-small', 'character-small');
-    // }
 
     if (event.key === 'ArrowRight') {
       this.setClass('character-big-move', 'character-big');
