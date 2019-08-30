@@ -9,6 +9,23 @@
   z-index: -2;
 }
 
+.respawn-wrap {
+  position: absolute;
+  width: 370px;
+  height: 45px;
+  font-family: Bangers;
+  letter-spacing: 2px;
+  background-color: orange;
+  text-align: center;
+  animation: respawnBlink 1s 1 forwards;
+  animation-delay: 1.5s;
+}
+
+.respawn-text {
+  font-size: 40px;
+  color: rgb(0, 0, 0);
+}
+
 .character-big {
   position: absolute;
   background: url("../../assets/img/character-big.png");
@@ -53,6 +70,18 @@
   }
 }
 
+@keyframes respawnBlink {
+  0% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 0;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
 .left {
   flex: auto;
   background-color: #8a8af3;
@@ -85,14 +114,6 @@
   z-index: inherit;
 }
 
-.timer-wrap {
-  position: absolute;
-  width: 200px;
-  font-family: Bangers;
-  letter-spacing: 2px;
-  right: 0;
-}
-
 .car1 {
   position: absolute;
   background-image: url(../../assets/img/lambo1.svg);
@@ -114,6 +135,14 @@
   background-size: 100% auto;
 }
 
+.timer-wrap {
+  position: absolute;
+  width: 200px;
+  font-family: Bangers;
+  letter-spacing: 2px;
+  right: 0;
+}
+
 .timer {
   display: block;
   font-size: 40px;
@@ -121,6 +150,22 @@
 }
 
 @media screen and (max-width: 1430px) {
+  .respawn-wrap {
+    position: absolute;
+    width: 330px;
+    height: 40px;
+    font-family: Bangers;
+    letter-spacing: 2px;
+    background-color: orange;
+    text-align: center;
+  }
+  
+  .respawn-text {
+    display: block;
+    font-size: 35px;
+    color: rgb(0, 0, 0);
+  }
+
   .timer-wrap {
     position: absolute;
     width: 180px;
@@ -137,6 +182,22 @@
 }
 
 @media screen and (max-width: 1170px) {
+  .respawn-wrap {
+    position: absolute;
+    width: 250px;
+    height: 30px;
+    font-family: Bangers;
+    letter-spacing: 2px;
+    background-color: orange;
+    text-align: center;
+  }
+  
+  .respawn-text {
+    display: block;
+    font-size: 26px;
+    color: rgb(0, 0, 0);
+  }
+
   .timer-wrap {
     position: absolute;
     width: 145px;
@@ -153,6 +214,22 @@
 }
 
 @media screen and (max-width: 880px) {
+  .respawn-wrap {
+    position: absolute;
+    width: 200px;
+    height: 24px;
+    font-family: Bangers;
+    letter-spacing: 2px;
+    background-color: orange;
+    text-align: center;
+  }
+  
+  .respawn-text {
+    display: block;
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+  }
+
   .timer-wrap {
     position: absolute;
     width: 155px;
@@ -169,6 +246,22 @@
 }
 
 @media screen and (max-width: 700px) {
+  .respawn-wrap {
+    position: absolute;
+    width: 160px;
+    height: 18px;
+    font-family: Bangers;
+    letter-spacing: 2px;
+    background-color: orange;
+    text-align: center;
+  }
+  
+  .respawn-text {
+    display: block;
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+  }
+
   .timer-wrap {
     position: absolute;
     width: 130px;
@@ -185,6 +278,22 @@
 }
 
 @media screen and (max-width: 550px) {
+  .respawn-wrap {
+    position: absolute;
+    width: 130px;
+    height: 13px;
+    font-family: Bangers;
+    letter-spacing: 2px;
+    background-color: orange;
+    text-align: center;
+  }
+  
+  .respawn-text {
+    display: block;
+    font-size: 11px;
+    color: rgb(0, 0, 0);
+  }
+
   .timer-wrap {
     position: absolute;
     width: 100px;
@@ -201,6 +310,22 @@
 }
 
 @media screen and (max-width: 450px) {
+  .respawn-wrap {
+    position: absolute;
+    width: 120px;
+    height: 10px;
+    font-family: Bangers;
+    letter-spacing: 2px;
+    background-color: orange;
+    text-align: center;
+  }
+  
+  .respawn-text {
+    display: block;
+    font-size: 8px;
+    color: rgb(0, 0, 0);
+  }
+
   .timer-wrap {
     position: absolute;
     width: 85px;

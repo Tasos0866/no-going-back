@@ -57,6 +57,9 @@ export class HomeComponent implements OnInit {
   car3PositionX: number;
   car3PositionY: number;
 
+  // Character Respawned text
+  hasRespawnedVisibility: string;
+
   constructor() {
     // Window
     this.initialWidth = 1920;
@@ -105,6 +108,9 @@ export class HomeComponent implements OnInit {
     this.car3Height = this.car3HeightAt1920 * this.windowWidthRatio;
     this.car3PositionX = this.car3PositionXat1920 * this.windowWidthRatio - (this.car3Width / 2);
     this.car3PositionY = 400;
+
+    // Character Respawned text
+    this.hasRespawnedVisibility = 'hidden';
   }
 
   ngOnInit() {

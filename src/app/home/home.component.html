@@ -1,9 +1,14 @@
 <div class="container">
     <div class="character-big"
-    [style.width.px]="charWidth"
-    [style.height.px]="charHeight"
-    [style.left.px]="positionX"
-    [style.bottom.px]="positionY"></div>
+        [style.width.px]="charWidth"
+        [style.height.px]="charHeight"
+        [style.left.px]="positionX"
+        [style.bottom.px]="positionY">
+    </div>
+    <div class="respawn-wrap"
+        [style.visibility]="hasRespawnedVisibility">
+        <span class="respawn-text">Character Respawned</span>
+    </div>
     <div class="left"></div>
     <div class="center">
         <div class="car1"
