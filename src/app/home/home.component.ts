@@ -62,6 +62,10 @@ export class HomeComponent implements OnInit {
   // Character Respawned text
   hasRespawnedVisibility: string;
 
+  // Score
+  timesPassed: number;
+  timesPassedLimit: number
+
   constructor() {
     // Window
     this.initialWidth = 1920;
@@ -114,6 +118,10 @@ export class HomeComponent implements OnInit {
 
     // Character Respawned text
     this.hasRespawnedVisibility = 'hidden';
+
+    // Score
+    this.timesPassed = 0;
+    this.timesPassedLimit = 10;
   }
 
   ngOnInit() {
@@ -201,6 +209,8 @@ export class HomeComponent implements OnInit {
         this.positionX = this.positionX + 20;
         this.setClass('character-big', 'character-big-move');
         this.setClass('character-small', 'character-small-move');
+      } else {
+        this.reachTheEndConsequences();
       }
     }
   }
@@ -305,6 +315,28 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.hasRespawnedVisibility = 'hidden';
     }, 3000);
+  }
+
+  reachTheEndConsequences() {
+    // Update score
+    this.timesPassed = this.timesPassed + 1;
+
+    if (this.timesPassed < this.timesPassedLimit) {
+      // Send character to initial position
+      this.positionX = 10;
+      this.positionY = this.positionY = (window.innerHeight - this.charHeight) / 2;
+
+      // Display respawn message
+      this.hasRespawnedVisibility = 'visible';
+
+      // Hide respawn message after 3 seconds
+      setTimeout(() => {
+        this.hasRespawnedVisibility = 'hidden';
+      }, 3000);
+    } else {
+      console.log('you won');
+      //this.timerSubscription.unsubscribe();
+    }
   }
 
   getRoadOffsetLeft() {
