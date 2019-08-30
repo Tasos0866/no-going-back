@@ -95,21 +95,21 @@
 
 .car1 {
   position: absolute;
-  background-image: url(../../assets/img/car1.svg);
+  background-image: url(../../assets/img/lambo1.svg);
   background-repeat: no-repeat;
   background-size: 100% auto;
 }
 
 .car2 {
   position: absolute;
-  background-image: url(../../assets/img/car2.svg);
+  background-image: url(../../assets/img/lambo2.svg);
   background-repeat: no-repeat;
   background-size: 100% auto;
 }
 
 .car3 {
   position: absolute;
-  background-image: url(../../assets/img/lambo.svg);
+  background-image: url(../../assets/img/lambo3.svg);
   background-repeat: no-repeat;
   background-size: 100% auto;
 }

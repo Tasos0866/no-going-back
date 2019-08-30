@@ -1,6 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
-import { debug } from 'util';
 
 @Component({
   selector: 'app-home',
@@ -83,7 +82,7 @@ export class HomeComponent implements OnInit {
     // Car at first lane
     this.carPositionXat1920 = 600;
     this.carWidthAt1920 = 95;
-    this.carHeightAt1920 = 184;
+    this.carHeightAt1920 = 191;
     this.carWidth = this.carWidthAt1920 * this.windowWidthRatio;
     this.carHeight = this.carHeightAt1920 * this.windowWidthRatio;
     this.carPositionX = this.carPositionXat1920 * this.windowWidthRatio - (this.carWidth / 2);
@@ -92,7 +91,7 @@ export class HomeComponent implements OnInit {
     // Car at second lane
     this.car2PositionXat1920 = 800;
     this.car2WidthAt1920 = 95;
-    this.car2HeightAt1920 = 184;
+    this.car2HeightAt1920 = 191;
     this.car2Width = this.car2WidthAt1920 * this.windowWidthRatio;
     this.car2Height = this.car2HeightAt1920 * this.windowWidthRatio;
     this.car2PositionX = this.car2PositionXat1920 * this.windowWidthRatio - (this.car2Width / 2);
