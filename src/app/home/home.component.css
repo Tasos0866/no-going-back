@@ -9,25 +9,47 @@
   z-index: -2;
 }
 
-.character {
+.character-big {
   position: absolute;
-  background: url("../../assets/img/character.png");
+  background: url("../../assets/img/character-big.png");
   background-position: 300px;
   z-index: -1;
 }
 
-.characterMove {
+.character-big-move {
   position: absolute;
-  background: url("../../assets/img/character.png");
-  animation: animateCharacter 1s steps(8) infinite;
+  background: url("../../assets/img/character-big.png");
+  animation: animateCharacterBig 1s steps(8) infinite;
 }
 
-@keyframes animateCharacter {
+.character-small {
+  position: absolute;
+  background: url("../../assets/img/character-small.png");
+  background-position: 120px;
+  z-index: -1;
+}
+
+.character-small-move {
+  position: absolute;
+  background: url("../../assets/img/character-small.png");
+  animation: animateCharacterSmall 1s steps(8) infinite;
+}
+
+@keyframes animateCharacterBig {
   from {
     background-position: 0;
   }
   to {
     background-position: -399px;
+  }
+}
+
+@keyframes animateCharacterSmall {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: -160px;
   }
 }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-home',
@@ -108,6 +109,13 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    // If the window is smaller than ~1350px display the small chracter
+    if (this.windowWidthRatio < 0.703) {
+      this.charWidth = 20;
+      this.charHeight = 32;
+      this.setClass('character-big', 'character-small');
+    }
+
     // Create an Observable that will publish a value on an interval
     const secondsCounter = interval(10);
     // Subscribe to begin publishing values
@@ -131,28 +139,32 @@ export class HomeComponent implements OnInit {
     if (event.key === 'ArrowUp') {
       if (this.positionY < (window.innerHeight - this.charHeight) - 20) {
         this.positionY = this.positionY + 20;
-        this.setClass('character', 'characterMove');
+        this.setClass('character-big', 'character-big-move');
+        this.setClass('character-small', 'character-small-move');
       }
     }
 
     if (event.key === 'ArrowDown') {
       if (this.positionY > 20) {
         this.positionY = this.positionY - 20;
-        this.setClass('character', 'characterMove');
+        this.setClass('character-big', 'character-big-move');
+        this.setClass('character-small', 'character-small-move');
       }
     }
 
     // if (event.key === 'ArrowLeft') {
     //   if (this.positionX - this.charWidth > 0) {
     //     this.positionX = this.positionX - 20;
-    //     this.setClass('character', 'characterMove');
+    //     this.setClass('character-big', 'character-big-move');
+    //     this.setClass('character-small', 'character-small-move');
     //   }
     // }
 
     if (event.key === 'ArrowRight') {
       if (this.positionX < (window.innerWidth - this.charWidth) - 20) {
         this.positionX = this.positionX + 20;
-        this.setClass('character', 'characterMove');
+        this.setClass('character-big', 'character-big-move');
+        this.setClass('character-small', 'character-small-move');
       }
     }
   }
@@ -160,19 +172,23 @@ export class HomeComponent implements OnInit {
   @HostListener('document:keyup', ['$event'])
   handleKeyboardEvent2(event: KeyboardEvent) {
     if (event.key === 'ArrowUp') {
-      this.setClass('characterMove', 'character');
+      this.setClass('character-big-move', 'character-big');
+      this.setClass('character-small-move', 'character-small');
     }
 
     if (event.key === 'ArrowDown') {
-      this.setClass('characterMove', 'character');
+      this.setClass('character-big-move', 'character-big');
+      this.setClass('character-small-move', 'character-small');
     }
 
     // if (event.key === 'ArrowLeft') {
-    //   this.setClass('characterMove', 'character');
+    //   this.setClass('character-big-move', 'character-big');
+    //   this.setClass('character-small', 'character-small');
     // }
 
     if (event.key === 'ArrowRight') {
-      this.setClass('characterMove', 'character');
+      this.setClass('character-big-move', 'character-big');
+      this.setClass('character-small-move', 'character-small');
     }
   }
 
@@ -185,6 +201,17 @@ export class HomeComponent implements OnInit {
     // Move character to initial position if the window is resized [anticheat]
     this.positionX = 10;
     this.positionY = (window.innerHeight - this.charHeight) / 2;
+
+    // If the window is smaller than ~1350px display the small chracter
+    if (this.windowWidthRatio < 0.703) {
+      this.charWidth = 20;
+      this.charHeight = 32;
+      this.setClass('character-big', 'character-small');
+    } else {
+      this.charWidth = 49;
+      this.charHeight = 80;
+      this.setClass('character-small', 'character-big');
+    }
 
     // ** Keep the cars inside the road  ** \\
     // The car in the first lane
