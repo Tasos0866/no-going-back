@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
 
   // Score
   timesPassed: number;
-  timesPassedLimit: number
+  timesPassedLimit: number;
 
   constructor() {
     // Window
@@ -156,7 +156,7 @@ export class HomeComponent implements OnInit {
 
     // Subscribe to begin publishing values
     this.timerSubscription = gameInterval.subscribe(n => {
-      
+
       // If the character and car1 are in the same y position
       if (this.positionY + this.charHeight > this.carPositionY &&
           this.positionY < this.carPositionY + this.carHeight) {
@@ -286,17 +286,17 @@ export class HomeComponent implements OnInit {
   }
 
   checkCollisionX() {
-    if(this.positionX + this.charWidth - 10 > this.carPositionX + this.roadPositionLeft &&
+    if (this.positionX + this.charWidth - 10 > this.carPositionX + this.roadPositionLeft &&
       this.positionX < this.carPositionX + this.roadPositionLeft + this.carWidth) {
       return true;
     }
 
-    if(this.positionX + this.charWidth - 10 > this.car2PositionX + this.roadPositionLeft &&
+    if (this.positionX + this.charWidth - 10 > this.car2PositionX + this.roadPositionLeft &&
       this.positionX < this.car2PositionX + this.roadPositionLeft + this.car2Width) {
       return true;
     }
 
-    if(this.positionX + this.charWidth - 10 > this.car3PositionX + this.roadPositionLeft &&
+    if (this.positionX + this.charWidth - 10 > this.car3PositionX + this.roadPositionLeft &&
       this.positionX < this.car3PositionX + this.roadPositionLeft + this.car3Width) {
       return true;
     }
@@ -335,12 +335,12 @@ export class HomeComponent implements OnInit {
       }, 3000);
     } else {
       console.log('you won');
-      //this.timerSubscription.unsubscribe();
+      // this.timerSubscription.unsubscribe();
     }
   }
 
   getRoadOffsetLeft() {
-    let center = <HTMLElement> document.getElementsByClassName('center')[0];
+    const center = document.getElementsByClassName('center')[0] as HTMLElement;
     return center.offsetLeft;
   }
 }
