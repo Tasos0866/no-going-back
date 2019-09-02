@@ -340,7 +340,7 @@ export class HomeComponent implements OnInit {
   }
 
   getRoadOffsetLeft() {
-    let center = document.getElementsByClassName('center')[0];
+    let center = <HTMLElement> document.getElementsByClassName('center')[0];
     return center.offsetLeft;
   }
 }
