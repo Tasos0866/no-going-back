@@ -148,14 +148,13 @@ export class HomeComponent implements OnInit {
         this.minutes = this.minutes + 1;
         this.displayMinutes = this.addZero(this.minutes);
       }
-      });
-    this.timerSubscription.unsubscribe();
+    });
 
     // Create an observable that will publish any value that is relevant to gameplay
     const gameInterval = interval(33);  // 30fps
 
     // Subscribe to begin publishing values
-    this.timerSubscription = gameInterval.subscribe(n => {
+    this.gameSubscription = gameInterval.subscribe(n => {
 
       // If the character and car1 are in the same y position
       if (this.positionY + this.charHeight > this.carPositionY &&
@@ -318,10 +317,10 @@ export class HomeComponent implements OnInit {
   }
 
   reachTheEndConsequences() {
-    // Update score
-    this.timesPassed = this.timesPassed + 1;
+    if (this.timesPassed + 1 < this.timesPassedLimit) {
+      // Update score
+      this.timesPassed = this.timesPassed + 1;
 
-    if (this.timesPassed < this.timesPassedLimit) {
       // Send character to initial position
       this.positionX = 10;
       this.positionY = this.positionY = (window.innerHeight - this.charHeight) / 2;
@@ -334,8 +333,9 @@ export class HomeComponent implements OnInit {
         this.hasRespawnedVisibility = 'hidden';
       }, 3000);
     } else {
+      this.timesPassed = this.timesPassedLimit;
+      this.timerSubscription.unsubscribe();
       console.log('you won');
-      // this.timerSubscription.unsubscribe();
     }
   }
 
