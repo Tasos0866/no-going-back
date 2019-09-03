@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { routeConfig } from './routeConfig';
 import { HomeComponent } from './home/home.component';
+import { StartmenuComponent } from './startmenu/startmenu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    StartmenuComponent
   ],
   imports: [
     BrowserModule,
