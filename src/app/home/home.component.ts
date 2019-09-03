@@ -160,7 +160,7 @@ export class HomeComponent implements OnInit {
       if (this.positionY + this.charHeight > this.carPositionY &&
           this.positionY < this.carPositionY + this.carHeight) {
         // Check for collision in the x axes
-        if (this.checkCollisionX()) {
+        if (this.checkCollisionX('car1')) {
           this.collisionConsequences();
         }
       }
@@ -169,7 +169,7 @@ export class HomeComponent implements OnInit {
       if (this.positionY + this.charHeight > this.car2PositionY &&
           this.positionY < this.car2PositionY + this.car2Height) {
         // Check for collision in the x axes
-        if (this.checkCollisionX()) {
+        if (this.checkCollisionX('car2')) {
           this.collisionConsequences();
         }
       }
@@ -178,7 +178,7 @@ export class HomeComponent implements OnInit {
       if (this.positionY + this.charHeight > this.car3PositionY &&
           this.positionY < this.car3PositionY + this.car3Height) {
         // Check for collision in the x axes
-        if (this.checkCollisionX()) {
+        if (this.checkCollisionX('car3')) {
           this.collisionConsequences();
         }
       }
@@ -284,19 +284,22 @@ export class HomeComponent implements OnInit {
     return (myNumber < 10 ? '0' : '') + myNumber;
   }
 
-  checkCollisionX() {
+  checkCollisionX(vehicle: string) {
     if (this.positionX + this.charWidth - 10 > this.carPositionX + this.roadPositionLeft &&
-      this.positionX < this.carPositionX + this.roadPositionLeft + this.carWidth) {
-      return true;
+      this.positionX < this.carPositionX + this.roadPositionLeft + this.carWidth &&
+      vehicle === 'car1') {
+        return true;
     }
 
     if (this.positionX + this.charWidth - 10 > this.car2PositionX + this.roadPositionLeft &&
-      this.positionX < this.car2PositionX + this.roadPositionLeft + this.car2Width) {
+      this.positionX < this.car2PositionX + this.roadPositionLeft + this.car2Width &&
+      vehicle === 'car2') {
       return true;
     }
 
     if (this.positionX + this.charWidth - 10 > this.car3PositionX + this.roadPositionLeft &&
-      this.positionX < this.car3PositionX + this.roadPositionLeft + this.car3Width) {
+      this.positionX < this.car3PositionX + this.roadPositionLeft + this.car3Width &&
+      vehicle === 'car3') {
       return true;
     }
     return false;
