@@ -14,3 +14,43 @@ svg {
     max-width: 100%;
     max-height: 100%;
 }
+
+.play-button {
+    fill:#000000;
+    fill-opacity:0.5;
+}
+
+.play-button:hover .play-text{
+    fill:#000000;
+    fill-opacity: 1;
+}
+
+.play-button:hover #lane1-left {
+    fill: rgb(233, 227, 227);
+    fill-opacity: 1;
+}
+
+.play-button:hover #lane1-right {
+    fill: rgb(233, 227, 227);
+    fill-opacity: 1;
+}
+
+.play-button:hover #lane2-left {
+    fill: rgb(233, 227, 227);
+    fill-opacity: 1;
+}
+
+.play-button:hover #lane2-right {
+    fill: rgb(233, 227, 227);
+    fill-opacity: 1;
+}
+
+.play-button:hover #line-up {
+    fill: rgb(30, 105, 190);
+    fill-opacity: 0.9;
+}
+
+.play-button:hover #line-down {
+    fill: rgb(30, 105, 190);
+    fill-opacity: 0.9;
+}
