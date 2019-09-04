@@ -40,6 +40,8 @@ export class HomeComponent implements OnInit {
   carHeight: number;
   carPositionX: number;
   carPositionY: number;
+  carSpeed: number;
+  carStartDelay: number;
 
   // Car at second lane
   car2PositionXat1920: number;
@@ -49,6 +51,8 @@ export class HomeComponent implements OnInit {
   car2Height: number;
   car2PositionX: number;
   car2PositionY: number;
+  car2Speed: number;
+  car2StartDelay: number;
 
   // Car at third lane
   car3PositionXat1920: number;
@@ -58,6 +62,8 @@ export class HomeComponent implements OnInit {
   car3Height: number;
   car3PositionX: number;
   car3PositionY: number;
+  car3Speed: number;
+  car3StartDelay: number;
 
   // Character Respawned text
   hasRespawnedVisibility: string;
@@ -96,7 +102,9 @@ export class HomeComponent implements OnInit {
     this.carWidth = this.carWidthAt1920 * this.windowWidthRatio;
     this.carHeight = this.carHeightAt1920 * this.windowWidthRatio;
     this.carPositionX = this.carPositionXat1920 * this.windowWidthRatio - (this.carWidth / 2);
-    this.carPositionY = 400;
+    this.carPositionY = window.innerHeight + this.carHeight;
+    this.carSpeed = 1.4;
+    this.carStartDelay = 1;
 
     // Car at second lane
     this.car2PositionXat1920 = 800;
@@ -105,7 +113,9 @@ export class HomeComponent implements OnInit {
     this.car2Width = this.car2WidthAt1920 * this.windowWidthRatio;
     this.car2Height = this.car2HeightAt1920 * this.windowWidthRatio;
     this.car2PositionX = this.car2PositionXat1920 * this.windowWidthRatio - (this.car2Width / 2);
-    this.car2PositionY = 400;
+    this.car2PositionY = window.innerHeight + this.car2Height * 3;
+    this.car2Speed = 2.6;
+    this.car2StartDelay = 3;
 
     // Car at third lane
     this.car3PositionXat1920 = 1000;
@@ -114,7 +124,9 @@ export class HomeComponent implements OnInit {
     this.car3Width = this.car3WidthAt1920 * this.windowWidthRatio;
     this.car3Height = this.car3HeightAt1920 * this.windowWidthRatio;
     this.car3PositionX = this.car3PositionXat1920 * this.windowWidthRatio - (this.car3Width / 2);
-    this.car3PositionY = 400;
+    this.car3PositionY = window.innerHeight + this.car3Height * 4;
+    this.car3Speed = 2;
+    this.car3StartDelay = 4;
 
     // Character Respawned text
     this.hasRespawnedVisibility = 'hidden';
@@ -151,36 +163,25 @@ export class HomeComponent implements OnInit {
     });
 
     // Create an observable that will publish any value that is relevant to gameplay
-    const gameInterval = interval(33);  // 30fps
+    const gameInterval = interval(5);
 
     // Subscribe to begin publishing values
     this.gameSubscription = gameInterval.subscribe(n => {
+      // Check for collisions
+      this.checkForCollisions();
 
-      // If the character and car1 are in the same y position
-      if (this.positionY + this.charHeight > this.carPositionY &&
-          this.positionY < this.carPositionY + this.carHeight) {
-        // Check for collision in the x axes
-        if (this.checkCollisionX('car1')) {
-          this.collisionConsequences();
-        }
+      // Update the positions of the cars
+      this.updateCarsPosition();
+
+      // Check if the cars have reached the bottom of the screen
+      if (this.carPositionY < -(this.carHeight)) {
+        this.generateNewCar('car');
       }
-
-      // If the character and car2 are in the same y position
-      if (this.positionY + this.charHeight > this.car2PositionY &&
-          this.positionY < this.car2PositionY + this.car2Height) {
-        // Check for collision in the x axes
-        if (this.checkCollisionX('car2')) {
-          this.collisionConsequences();
-        }
+      if (this.car2PositionY < -(this.car2Height)) {
+        this.generateNewCar('car2');
       }
-
-      // If the character and car3 are in the same y position
-      if (this.positionY + this.charHeight > this.car3PositionY &&
-          this.positionY < this.car3PositionY + this.car3Height) {
-        // Check for collision in the x axes
-        if (this.checkCollisionX('car3')) {
-          this.collisionConsequences();
-        }
+      if (this.car3PositionY < -(this.car3Height)) {
+        this.generateNewCar('car3');
       }
     });
   }
@@ -284,6 +285,35 @@ export class HomeComponent implements OnInit {
     return (myNumber < 10 ? '0' : '') + myNumber;
   }
 
+  checkForCollisions() {
+    // If the character and car1 are in the same y position
+    if (this.positionY + this.charHeight > this.carPositionY &&
+      this.positionY < this.carPositionY + this.carHeight) {
+      // Check for collision in the x axes
+      if (this.checkCollisionX('car1')) {
+        this.collisionConsequences();
+      }
+    }
+
+    // If the character and car2 are in the same y position
+    if (this.positionY + this.charHeight > this.car2PositionY &&
+        this.positionY < this.car2PositionY + this.car2Height) {
+      // Check for collision in the x axes
+      if (this.checkCollisionX('car2')) {
+        this.collisionConsequences();
+      }
+    }
+
+    // If the character and car3 are in the same y position
+    if (this.positionY + this.charHeight > this.car3PositionY &&
+        this.positionY < this.car3PositionY + this.car3Height) {
+      // Check for collision in the x axes
+      if (this.checkCollisionX('car3')) {
+        this.collisionConsequences();
+      }
+    }
+  }
+
   checkCollisionX(vehicle: string) {
     if (this.positionX + this.charWidth - 10 > this.carPositionX + this.roadPositionLeft &&
       this.positionX < this.carPositionX + this.roadPositionLeft + this.carWidth &&
@@ -346,4 +376,28 @@ export class HomeComponent implements OnInit {
     const center = document.getElementsByClassName('center')[0] as HTMLElement;
     return center.offsetLeft;
   }
+
+  randomInt(min, max){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+ }
+
+ updateCarsPosition() {
+    this.carPositionY = this.carPositionY - this.carSpeed;
+    this.car2PositionY = this.car2PositionY - this.car2Speed;
+    this.car3PositionY = this.car3PositionY - this.car3Speed;
+ }
+
+ generateNewCar(car: string) {
+   if (car === 'car') {
+    this.carPositionY = window.innerHeight + this.carHeight * this.carStartDelay;
+  }
+
+   if (car === 'car2') {
+    this.car2PositionY = window.innerHeight + this.car2Height * this.car2StartDelay;
+  }
+
+   if (car === 'car3')  {
+    this.car3PositionY = window.innerHeight + this.car3Height * this.car3StartDelay;
+  }
+ }
 }
