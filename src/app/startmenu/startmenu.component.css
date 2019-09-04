@@ -18,39 +18,75 @@ svg {
 .play-button {
     fill:#000000;
     fill-opacity:0.5;
+    outline: none;
 }
 
-.play-button:hover .play-text{
+.play-button:hover:not(:active) .play-text{
     fill:#000000;
     fill-opacity: 1;
 }
 
-.play-button:hover #lane1-left {
+.play-button:hover:not(:active) #lane1-left {
     fill: rgb(233, 227, 227);
     fill-opacity: 1;
 }
 
-.play-button:hover #lane1-right {
+.play-button:hover:not(:active) #lane1-right {
     fill: rgb(233, 227, 227);
     fill-opacity: 1;
 }
 
-.play-button:hover #lane2-left {
+.play-button:hover:not(:active) #lane2-left {
     fill: rgb(233, 227, 227);
     fill-opacity: 1;
 }
 
-.play-button:hover #lane2-right {
+.play-button:hover:not(:active) #lane2-right {
     fill: rgb(233, 227, 227);
     fill-opacity: 1;
 }
 
-.play-button:hover #line-up {
+.play-button:hover:not(:active) #line-up {
     fill: rgb(30, 105, 190);
     fill-opacity: 0.9;
 }
 
-.play-button:hover #line-down {
+.play-button:hover:not(:active) #line-down {
     fill: rgb(30, 105, 190);
     fill-opacity: 0.9;
+}
+
+.play-button:active .play-text {
+    fill: rgb(0, 0, 0);
+    fill-opacity: 0.4;
+}
+
+.play-button:active #lane1-left {
+    fill: rgb(233, 227, 227);
+    fill-opacity: 0.4;
+}
+
+.play-button:active #lane1-right {
+    fill: rgb(233, 227, 227);
+    fill-opacity: 0.4;
+}
+
+.play-button:active #lane2-left {
+    fill: rgb(233, 227, 227);
+    fill-opacity: 0.4;
+}
+
+.play-button:active #lane2-right {
+    fill: rgb(233, 227, 227);
+    fill-opacity: 0.4;
+}
+
+.play-button:active #line-up {
+    fill: rgb(30, 105, 190);
+    fill-opacity: 0.4;
+}
+
+.play-button:active #line-down {
+    fill: rgb(30, 105, 190);
+    fill-opacity: 0.4;
 }
