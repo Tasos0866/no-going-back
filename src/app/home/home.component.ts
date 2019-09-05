@@ -518,6 +518,13 @@ export class HomeComponent implements OnInit {
     if (this.positionX < this.enemyPositionX) {
       this.enemyPositionX = this.enemyPositionX - this.enemySpeedX;
     }
+
+    // Check if the enemy is too close to player spawn
+    if ((this.enemyPositionX < 2 * this.charWidth) && (this.enemyPositionY - window.innerHeight / 2 < 2 * this.charHeight)) {
+      // Move enemy to initial position
+      this.enemyPositionX = 10;
+      this.enemyPositionY = window.innerHeight - 80;
+    }
   }
 
   checkCharacterEnemyCollisions() {
@@ -527,7 +534,7 @@ export class HomeComponent implements OnInit {
       // Check for collision in the y axes
       if (this.positionX + this.charWidth - 10 > this.enemyPositionX &&
         this.positionX < this.enemyPositionX + this.enemyWidth) {
-          console.log('character is caught');
+          this.collisionConsequences();
       }
     }
   }
