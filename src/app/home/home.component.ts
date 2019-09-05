@@ -82,9 +82,9 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router) {
     // If the user nagivated to the game page by himself go to start menu
-    if (this.router.getCurrentNavigation().extras.replaceUrl) {
-      this.router.navigate(['/startmenu']);
-    }
+    // if (this.router.getCurrentNavigation().extras.replaceUrl) {
+    //   this.router.navigate(['/startmenu']);
+    // }
 
     // Window
     this.initialWidth = 1920;
@@ -185,10 +185,10 @@ export class HomeComponent implements OnInit {
     // Subscribe to begin publishing values
     this.gameSubscription = gameInterval.subscribe(n => {
       // Check for collisions
-      this.checkForCollisions();
+     //////////// this.checkForCollisions();
 
       // Update the positions of the cars
-      this.updateCarsPosition();
+      ////////////////this.updateCarsPosition();
 
       // Check if the cars have reached the bottom of the screen
       if (this.carPositionY < -(this.carHeight)) {
