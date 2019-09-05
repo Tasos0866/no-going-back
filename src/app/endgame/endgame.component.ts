@@ -12,6 +12,11 @@ export class EndgameComponent implements OnInit {
   milliseconds: string;
 
   constructor(private router: Router) {
+    // If the user nagivated to the endgame page by himself go to start menu
+    if (!this.router.getCurrentNavigation().extras.state) {
+      this.router.navigate(['/startmenu']);
+    }
+
     // Get the relevant game data
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as {
@@ -19,6 +24,7 @@ export class EndgameComponent implements OnInit {
       seconds: string,
       milliseconds: string
     };
+    
     this.minutes = state.minutes;
     this.seconds = state.seconds;
     this.milliseconds = state.milliseconds;
