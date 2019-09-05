@@ -175,7 +175,7 @@ export class HomeComponent implements OnInit {
 
       // Check if the cars have reached the bottom of the screen
       if (this.carPositionY < -(this.carHeight)) {
-        this.generateNewCar('car');
+        this.generateNewCar('car1');
       }
       if (this.car2PositionY < -(this.car2Height)) {
         this.generateNewCar('car2');
@@ -368,7 +368,6 @@ export class HomeComponent implements OnInit {
     } else {
       this.timesPassed = this.timesPassedLimit;
       this.timerSubscription.unsubscribe();
-      console.log('you won');
     }
   }
 
@@ -377,27 +376,49 @@ export class HomeComponent implements OnInit {
     return center.offsetLeft;
   }
 
-  randomInt(min, max){
+  randomInt(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
- }
-
- updateCarsPosition() {
-    this.carPositionY = this.carPositionY - this.carSpeed;
-    this.car2PositionY = this.car2PositionY - this.car2Speed;
-    this.car3PositionY = this.car3PositionY - this.car3Speed;
- }
-
- generateNewCar(car: string) {
-   if (car === 'car') {
-    this.carPositionY = window.innerHeight + this.carHeight * this.carStartDelay;
   }
 
-   if (car === 'car2') {
-    this.car2PositionY = window.innerHeight + this.car2Height * this.car2StartDelay;
+  updateCarsPosition() {
+      this.carPositionY = this.carPositionY - this.carSpeed;
+      this.car2PositionY = this.car2PositionY - this.car2Speed;
+      this.car3PositionY = this.car3PositionY - this.car3Speed;
   }
 
-   if (car === 'car3')  {
-    this.car3PositionY = window.innerHeight + this.car3Height * this.car3StartDelay;
+  generateNewCar(car: string) {
+    // Generate a random number between 1 and 3 with 2 decimal places
+    let randomSpeed = Math.random() * 3;
+    if (randomSpeed < 1) {
+      randomSpeed = 1 + Math.random();
+    }
+    randomSpeed = Math.round(randomSpeed * 100) / 100;
+
+    if (car === 'car1') {
+      // Set random speed and delay for car1
+      this.carStartDelay = this.randomInt(1, 3);
+      this.carSpeed = randomSpeed;
+
+      // Reposition car1 at the top and add a 'positional delay'
+      this.carPositionY = window.innerHeight + this.carHeight * this.carStartDelay;
+    }
+
+    if (car === 'car2') {
+      // Set random speed and delay for car2
+      this.car2StartDelay = this.randomInt(1, 3);
+      this.car2Speed = randomSpeed;
+      
+      // Reposition car2 at the top and add a 'positional delay'
+      this.car2PositionY = window.innerHeight + this.car2Height * this.car2StartDelay;
+    }
+
+    if (car === 'car3')  {
+      // Set random speed and delay for car3
+      this.car3StartDelay = this.randomInt(1, 3);
+      this.car3Speed = randomSpeed;
+
+      // Reposition car3 at the top and add a 'positional delay'
+      this.car3PositionY = window.innerHeight + this.car3Height * this.car3StartDelay;
+    }
   }
- }
 }
