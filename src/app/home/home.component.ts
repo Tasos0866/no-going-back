@@ -26,10 +26,10 @@ export class HomeComponent implements OnInit {
   // Timer
   minutes: number;
   seconds: number;
-  miliseconds: number;
+  milliseconds: number;
   displayMinutes: string;
   displaySeconds: string;
-  displayMiliseconds: string;
+  displayMilliseconds: string;
   timerSubscription: Subscription;
 
   // ** One car for each lane ** \\
@@ -90,10 +90,10 @@ export class HomeComponent implements OnInit {
     // Timer
     this.minutes = 0;
     this.seconds = 0;
-    this.miliseconds = 0;
+    this.milliseconds = 0;
     this.displayMinutes = '00';
     this.displaySeconds = '00';
-    this.displayMiliseconds = '00';
+    this.displayMilliseconds = '00';
 
     // One car for each lane
     // Car at first lane
@@ -151,13 +151,13 @@ export class HomeComponent implements OnInit {
 
     // Subscribe to begin publishing values
     this.timerSubscription = secondsCounter.subscribe(n => {
-      this.miliseconds = (n);
-      this.displayMiliseconds = this.addZero(this.miliseconds % 100);
-      if (this.miliseconds % 100 === 0) {
+      this.milliseconds = (n);
+      this.displayMilliseconds = this.addZero(this.milliseconds % 100);
+      if (this.milliseconds % 100 === 0) {
         this.seconds = (this.seconds + 1);
         this.displaySeconds = this.addZero(this.seconds  % 60);
       }
-      if (this.seconds % 60 === 0 && this.seconds !== 0 && (this.miliseconds + 100) % 6000 === 0) {
+      if (this.seconds % 60 === 0 && this.seconds !== 0 && (this.milliseconds + 100) % 6000 === 0) {
         this.minutes = this.minutes + 1;
         this.displayMinutes = this.addZero(this.minutes);
       }
