@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -72,6 +72,9 @@ export class HomeComponent implements OnInit {
   // Score
   timesPassed: number;
   timesPassedLimit: number;
+
+  // Routing
+  navExtras: NavigationExtras;
 
   constructor(private router: Router) {
     // Window
@@ -409,7 +412,7 @@ export class HomeComponent implements OnInit {
       // Set random speed and delay for car2
       this.car2StartDelay = this.randomInt(1, 3);
       this.car2Speed = randomSpeed;
-      
+
       // Reposition car2 at the top and add a 'positional delay'
       this.car2PositionY = window.innerHeight + this.car2Height * this.car2StartDelay;
     }
@@ -426,7 +429,13 @@ export class HomeComponent implements OnInit {
 
   endGameConsequences() {
     this.gameSubscription.unsubscribe();
-    this.router.navigate(['./endgame']);
-    console.log('Your time is: ' + this.displayMinutes + ':' + this.displaySeconds + ':' + this.displayMiliseconds);
+    this.navExtras = {
+      state: {
+        minutes: this.displayMinutes,
+        seconds: this.displaySeconds,
+        milliseconds: this.displayMilliseconds
+      }
+    };
+    this.router.navigate(['./endgame'], this.navExtras);
   }
 }
