@@ -15,13 +15,17 @@ export class HomeComponent implements OnInit {
   windowWidthRatio: number;
   gameSubscription: Subscription;
   roadPositionLeft: number;
+  normalWidthToHeightRatio: number;
+  currentWidthToHeightRatio: number;
 
   // Character
   positionX: number;
   positionY: number;
   charWidth: number;
   charHeight: number;
+  charSpeedAt1920: number;
   charSpeed: number;
+  speedAdjustment: number;
 
   // Timer
   minutes: number;
@@ -87,13 +91,17 @@ export class HomeComponent implements OnInit {
     this.currentWidth = window.innerWidth;
     this.windowWidthRatio = this.currentWidth / this.initialWidth;
     this.roadPositionLeft = 0;
+    this.normalWidthToHeightRatio = 1920 / 1080;
+    this.currentWidthToHeightRatio = window.innerWidth / window.innerHeight;
 
     // Character
     this.charWidth = 49;
     this.charHeight = 80;
-    this.charSpeed = 20;
+    this.charSpeedAt1920 = 20;
     this.positionX = 10;
     this.positionY = (window.innerHeight - this.charHeight) / 2;
+    this.speedAdjustment = this.currentWidthToHeightRatio / this.normalWidthToHeightRatio;
+    this.charSpeed =  this.charSpeedAt1920 * this.speedAdjustment;
 
     // Timer
     this.minutes = 0;
@@ -197,25 +205,28 @@ export class HomeComponent implements OnInit {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
+    this.currentWidthToHeightRatio = window.innerWidth / window.innerHeight;
+    this.speedAdjustment = this.currentWidthToHeightRatio / this.normalWidthToHeightRatio;
+    console.log(this.speedAdjustment);
     if (event.key === 'ArrowUp') {
-      if (this.positionY < (window.innerHeight - this.charHeight) - 20) {
-        this.positionY = this.positionY + 20;
+      if (this.positionY < (window.innerHeight - this.charHeight) - this.charSpeed) {
+        this.positionY = this.positionY + this.charSpeed;
         this.setClass('character-big', 'character-big-move');
         this.setClass('character-small', 'character-small-move');
       }
     }
 
     if (event.key === 'ArrowDown') {
-      if (this.positionY > 20) {
-        this.positionY = this.positionY - 20;
+      if (this.positionY > this.charSpeed) {
+        this.positionY = this.positionY - this.charSpeed;
         this.setClass('character-big', 'character-big-move');
         this.setClass('character-small', 'character-small-move');
       }
     }
 
     if (event.key === 'ArrowRight') {
-      if (this.positionX < (window.innerWidth - this.charWidth) - 20) {
-        this.positionX = this.positionX + 20;
+      if (this.positionX < (window.innerWidth - this.charWidth) - this.charSpeed) {
+        this.positionX = this.positionX + this.charSpeed;
         this.setClass('character-big', 'character-big-move');
         this.setClass('character-small', 'character-small-move');
       } else {
@@ -244,9 +255,10 @@ export class HomeComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    // Get the screen width ratio
+    // Get the screen width ratio and width to height ratio
     this.currentWidth = window.innerWidth;
     this.windowWidthRatio = this.currentWidth / this.initialWidth;
+    this.currentWidthToHeightRatio = this.currentWidth / window.innerHeight;
 
     // Get the distance from the start of the screen to the road div
     this.roadPositionLeft = this.getRoadOffsetLeft();
@@ -254,6 +266,10 @@ export class HomeComponent implements OnInit {
     // Move character to initial position if the window is resized [anticheat]
     this.positionX = 10;
     this.positionY = (window.innerHeight - this.charHeight) / 2;
+
+    // Adjust the character 's speed depending on the screen width to height ratio
+    this.speedAdjustment = this.currentWidthToHeightRatio / this.normalWidthToHeightRatio;
+    this.charSpeed = this.charSpeedAt1920 * this.speedAdjustment;
 
     // If the window is smaller than ~1350px display the small chracter
     if (this.windowWidthRatio < 0.703) {
