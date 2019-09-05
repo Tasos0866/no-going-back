@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -72,7 +73,7 @@ export class HomeComponent implements OnInit {
   timesPassed: number;
   timesPassedLimit: number;
 
-  constructor() {
+  constructor(private router: Router) {
     // Window
     this.initialWidth = 1920;
     this.currentWidth = window.innerWidth;
@@ -368,6 +369,7 @@ export class HomeComponent implements OnInit {
     } else {
       this.timesPassed = this.timesPassedLimit;
       this.timerSubscription.unsubscribe();
+      this.endGameConsequences();
     }
   }
 
@@ -420,5 +422,11 @@ export class HomeComponent implements OnInit {
       // Reposition car3 at the top and add a 'positional delay'
       this.car3PositionY = window.innerHeight + this.car3Height * this.car3StartDelay;
     }
+  }
+
+  endGameConsequences() {
+    this.gameSubscription.unsubscribe();
+    this.router.navigate(['./endgame']);
+    console.log('Your time is: ' + this.displayMinutes + ':' + this.displaySeconds + ':' + this.displayMiliseconds);
   }
 }

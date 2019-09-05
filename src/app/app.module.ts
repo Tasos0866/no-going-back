@@ -7,13 +7,15 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { routeConfig } from './routeConfig';
 import { HomeComponent } from './home/home.component';
 import { StartmenuComponent } from './startmenu/startmenu.component';
+import { EndgameComponent } from './endgame/endgame.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     HomeComponent,
-    StartmenuComponent
+    StartmenuComponent,
+    EndgameComponent
   ],
   imports: [
     BrowserModule,
