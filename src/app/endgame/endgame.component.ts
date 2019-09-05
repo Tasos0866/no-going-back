@@ -13,7 +13,7 @@ export class EndgameComponent implements OnInit {
 
   constructor(private router: Router) {
     // If the user nagivated to the endgame page by himself go to start menu
-    if (!this.router.getCurrentNavigation().extras.state) {
+    if (this.router.getCurrentNavigation().extras.replaceUrl) {
       this.router.navigate(['/startmenu']);
     }
 
