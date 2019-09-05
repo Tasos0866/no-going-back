@@ -36,4 +36,10 @@
             <span class="times-passed-text">Times passed: {{ timesPassed }} / {{ timesPassedLimit }}</span>
         </div>
     </div>
+    <div class="enemy"
+        [style.width.px]="enemyWidth"
+        [style.height.px]="enemyHeight"
+        [style.left.px]="enemyPositionX"
+        [style.bottom.px]="enemyPositionY">
+    </div>
 </div>

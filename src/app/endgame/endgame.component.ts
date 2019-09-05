@@ -24,7 +24,7 @@ export class EndgameComponent implements OnInit {
       seconds: string,
       milliseconds: string
     };
-    
+
     this.minutes = state.minutes;
     this.seconds = state.seconds;
     this.milliseconds = state.milliseconds;

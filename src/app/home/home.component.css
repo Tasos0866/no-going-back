@@ -52,6 +52,11 @@
   animation: animateCharacterSmall 1s steps(8) infinite;
 }
 
+.enemy {
+  position: absolute;
+  background-color: yellow;
+}
+
 @keyframes animateCharacterBig {
   from {
     background-position: 0;

@@ -27,6 +27,16 @@ export class HomeComponent implements OnInit {
   charSpeed: number;
   speedAdjustment: number;
 
+  // Enemy
+  enemyWidth: number;
+  enemyHeight: number;
+  enemyPositionX: number;
+  enemyPositionY: number;
+  enemySpeedXAt1920: number;
+  enemySpeedYAt1920: number;
+  enemySpeedX: number;
+  enemySpeedY: number;
+
   // Timer
   minutes: number;
   seconds: number;
@@ -103,6 +113,16 @@ export class HomeComponent implements OnInit {
     this.speedAdjustment = this.currentWidthToHeightRatio / this.normalWidthToHeightRatio;
     this.charSpeed =  this.charSpeedAt1920 * this.speedAdjustment;
 
+    // Enemy
+    this.enemyWidth = 60;
+    this.enemyHeight = 60;
+    this.enemyPositionX = 10;
+    this.enemyPositionY = window.innerHeight - 80;
+    this.enemySpeedXAt1920 = 0.8;
+    this.enemySpeedYAt1920 = 0.5;
+    this.enemySpeedX = this.enemySpeedXAt1920 * this.speedAdjustment;
+    this.enemySpeedY = this.enemySpeedYAt1920 * this.speedAdjustment;
+
     // Timer
     this.minutes = 0;
     this.seconds = 0;
@@ -154,11 +174,13 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    // If the window is smaller than ~1350px display the small chracter
+    // If the window is smaller than ~1350px display the small chracter & enemy
     if (this.windowWidthRatio < 0.703) {
       this.charWidth = 20;
       this.charHeight = 32;
       this.setClass('character-big', 'character-small');
+      this.enemyWidth = 30;
+      this.enemyHeight = 30;
     }
     this.roadPositionLeft = this.getRoadOffsetLeft();
 
@@ -173,6 +195,7 @@ export class HomeComponent implements OnInit {
         this.seconds = (this.seconds + 1);
         this.displaySeconds = this.addZero(this.seconds  % 60);
       }
+
       if (this.seconds % 60 === 0 && this.seconds !== 0 && (this.milliseconds + 100) % 6000 === 0) {
         this.minutes = this.minutes + 1;
         this.displayMinutes = this.addZero(this.minutes);
@@ -184,19 +207,27 @@ export class HomeComponent implements OnInit {
 
     // Subscribe to begin publishing values
     this.gameSubscription = gameInterval.subscribe(n => {
-      // Check for collisions
+      // Enemy follows the character
+      this.followCharacter();
+
+      // Check for character - enemy collisions
+      this.checkCharacterEnemyCollisions();
+
+      // Check for character - car collisions
      //////////// this.checkForCollisions();
 
       // Update the positions of the cars
-      ////////////////this.updateCarsPosition();
+      //////////////// this.updateCarsPosition();
 
       // Check if the cars have reached the bottom of the screen
       if (this.carPositionY < -(this.carHeight)) {
         this.generateNewCar('car1');
       }
+
       if (this.car2PositionY < -(this.car2Height)) {
         this.generateNewCar('car2');
       }
+
       if (this.car3PositionY < -(this.car3Height)) {
         this.generateNewCar('car3');
       }
@@ -207,7 +238,6 @@ export class HomeComponent implements OnInit {
   handleKeyboardEvent(event: KeyboardEvent) {
     this.currentWidthToHeightRatio = window.innerWidth / window.innerHeight;
     this.speedAdjustment = this.currentWidthToHeightRatio / this.normalWidthToHeightRatio;
-    console.log(this.speedAdjustment);
     if (event.key === 'ArrowUp') {
       if (this.positionY < (window.innerHeight - this.charHeight) - this.charSpeed) {
         this.positionY = this.positionY + this.charSpeed;
@@ -271,15 +301,27 @@ export class HomeComponent implements OnInit {
     this.speedAdjustment = this.currentWidthToHeightRatio / this.normalWidthToHeightRatio;
     this.charSpeed = this.charSpeedAt1920 * this.speedAdjustment;
 
-    // If the window is smaller than ~1350px display the small chracter
+    // Move enemy to initial position
+    this.enemyPositionX = 10;
+    this.enemyPositionY = window.innerHeight - 80;
+
+    // Adjust the enemy 's speed depending on the screen width to height ratio
+    this.enemySpeedX = this.enemySpeedXAt1920 * this.speedAdjustment;
+    this.enemySpeedY = this.enemySpeedYAt1920 * this.speedAdjustment;
+
+    // If the window is smaller than ~1350px display the small chracter & enemy
     if (this.windowWidthRatio < 0.703) {
       this.charWidth = 20;
       this.charHeight = 32;
       this.setClass('character-big', 'character-small');
+      this.enemyWidth = 30;
+      this.enemyHeight = 30;
     } else {
       this.charWidth = 49;
       this.charHeight = 80;
       this.setClass('character-small', 'character-big');
+      this.enemyWidth = 60;
+      this.enemyHeight = 60;
     }
 
     // ** Keep the cars inside the road  ** \\
@@ -458,5 +500,35 @@ export class HomeComponent implements OnInit {
       }
     };
     this.router.navigate(['./endgame'], this.navExtras);
+  }
+
+  followCharacter() {
+    if (this.positionY > this.enemyPositionY) {
+      this.enemyPositionY = this.enemyPositionY + this.enemySpeedY;
+    }
+
+    if (this.positionY < this.enemyPositionY) {
+      this.enemyPositionY = this.enemyPositionY - this.enemySpeedY;
+    }
+
+    if (this.positionX > this.enemyPositionX) {
+      this.enemyPositionX = this.enemyPositionX + this.enemySpeedX;
+    }
+
+    if (this.positionX < this.enemyPositionX) {
+      this.enemyPositionX = this.enemyPositionX - this.enemySpeedX;
+    }
+  }
+
+  checkCharacterEnemyCollisions() {
+    // If the character and enemy are in the same y position
+    if (this.positionY + this.charHeight > this.enemyPositionY &&
+      this.positionY < this.enemyPositionY + this.enemyHeight) {
+      // Check for collision in the y axes
+      if (this.positionX + this.charWidth - 10 > this.enemyPositionX &&
+        this.positionX < this.enemyPositionX + this.enemyWidth) {
+          console.log('character is caught');
+      }
+    }
   }
 }
