@@ -521,9 +521,9 @@ export class HomeComponent implements OnInit {
 
     // Check if the enemy is too close to player spawn
     if ((this.enemyPositionX < 2 * this.charWidth) && (this.enemyPositionY - window.innerHeight / 2 < 2 * this.charHeight)) {
-      // Move enemy to initial position
+      // Move enemy near the initial position
       this.enemyPositionX = 10;
-      this.enemyPositionY = window.innerHeight - 80;
+      this.enemyPositionY = window.innerHeight - this.enemyHeight * 2;
     }
   }
 
