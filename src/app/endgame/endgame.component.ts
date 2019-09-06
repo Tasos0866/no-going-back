@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,6 +10,10 @@ export class EndgameComponent implements OnInit {
   minutes: string;
   seconds: string;
   milliseconds: string;
+  textFontSizeAt1920: number;
+  timerFontSizeAt1920: number;
+  textFontSize: number;
+  timerFontSize: number;
 
   constructor(private router: Router) {
     // If the user nagivated to the endgame page by himself go to start menu
@@ -28,9 +32,29 @@ export class EndgameComponent implements OnInit {
     this.minutes = state.minutes;
     this.seconds = state.seconds;
     this.milliseconds = state.milliseconds;
+    this.textFontSizeAt1920 = 80;
+    this.timerFontSizeAt1920 = 70;
   }
 
   ngOnInit() {
-    console.log('Your time is: ' + this.minutes + ':' + this.seconds + ':' + this.milliseconds);
+    this.resizeText();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.resizeText();
+  }
+
+  resizeText() {
+    // Resize the score text
+    const widthRatio = window.innerWidth / 1920;
+    const heightRatio = window.innerHeight / 1080;
+    this.textFontSize = this.textFontSizeAt1920 * widthRatio;
+    this.timerFontSize = this.timerFontSizeAt1920 * widthRatio;
+
+    if (window.innerWidth > 1700 && window.innerHeight < 550) {
+      this.textFontSize = this.textFontSizeAt1920 * heightRatio;
+      this.timerFontSize = this.timerFontSizeAt1920 * heightRatio;
+    }
   }
 }
