@@ -1423,8 +1423,16 @@
                 {{minutes}} : {{ seconds }} : {{milliseconds}}
             </span>
         </div>
-        <div class="redirect">
-          <button routerLink="/startmenu">Redirect</button>
+        <div class="buttons">
+            <a class='menu'
+             mat-stroked-button
+             routerLink="/startmenu">
+                Menu
+            </a>
+            <a class="screenshot"
+             mat-stroked-button>
+                Screenshot
+            </a>
         </div>
     </div>
 </div>

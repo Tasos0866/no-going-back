@@ -9,11 +9,45 @@
     overflow: hidden;
     background: linear-gradient(42deg, #8bf5c3, #32a3e3, #c5f239);
     background-size: 600% 600%;
-    
     -webkit-animation: AnimationName 26s ease infinite;
     -moz-animation: AnimationName 26s ease infinite;
     animation: AnimationName 26s ease infinite;
-    
+}
+
+@-webkit-keyframes AnimationName {
+    0% {
+        background-position:0% 96%;
+    }
+    50% {
+        background-position:100% 5%;
+    }
+    100% {
+        background-position:0% 96%;
+    }
+}
+
+@-moz-keyframes AnimationName {
+    0% {
+        background-position:0% 96%;
+    }
+    50% {
+        background-position:100% 5%;
+    }
+    100% {
+        background-position:0% 96%;
+    }
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position:0% 96%;
+    }
+    50% {
+        background-position:100% 5%;
+    }
+    100% {
+        background-position:0% 96%;
+    }
 }
 
 svg {
@@ -45,18 +79,70 @@ svg {
     color: red;
 }
 
-@-webkit-keyframes AnimationName {
-    0%{background-position:0% 96%}
-    50%{background-position:100% 5%}
-    100%{background-position:0% 96%}
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
 }
-@-moz-keyframes AnimationName {
-    0%{background-position:0% 96%}
-    50%{background-position:100% 5%}
-    100%{background-position:0% 96%}
+
+.menu {
+    background-color: rgba(253, 148, 109, 0.342);
+    font-weight: bold;
+    font-size: 15px;
+    margin-right: 10px;
 }
-@keyframes AnimationName {
-    0%{background-position:0% 96%}
-    50%{background-position:100% 5%}
-    100%{background-position:0% 96%}
+
+.screenshot {
+    background-color: rgba(253, 148, 109, 0.342);
+    font-weight: bold;
+    font-size: 15px;
+}
+
+@media screen and (max-width: 1000px) {
+    .buttons {
+        margin-top: 15px;
+    }
+    
+    .menu {
+        font-size: 12px;
+        margin-right: 8px;
+    }
+    
+    .screenshot {
+
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .buttons {
+        margin-top: 10px;
+    }
+    
+    .menu {
+        font-size: 10px;
+        margin-right: 5px;
+    }
+    
+    .screenshot {
+
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .buttons {
+        margin-top: 10px;
+    }
+    
+    .menu {
+        font-size: 9px;
+        margin-right: 4px;
+    }
+    
+    .screenshot {
+
+        font-size: 9px;
+    }
 }
