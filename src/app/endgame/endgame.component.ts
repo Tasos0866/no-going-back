@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ResizedEvent } from 'angular-resize-event';
 
 @Component({
   selector: 'app-endgame',
@@ -51,5 +52,9 @@ export class EndgameComponent implements OnInit {
       this.textFontSize = this.textFontSizeAt1920 * heightRatio;
       this.timerFontSize = this.timerFontSizeAt1920 * heightRatio;
     }
+  }
+
+  onResized(event: ResizedEvent) {
+    this.resizeText();
   }
 }
