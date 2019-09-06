@@ -48,7 +48,7 @@ export class EndgameComponent implements OnInit {
     this.textFontSize = this.textFontSizeAt1920 * widthRatio;
     this.timerFontSize = this.timerFontSizeAt1920 * widthRatio;
 
-    if (window.innerWidth > 1700 && window.innerHeight < 550) {
+    if (widthRatio > heightRatio) {
       this.textFontSize = this.textFontSizeAt1920 * heightRatio;
       this.timerFontSize = this.timerFontSizeAt1920 * heightRatio;
     }
