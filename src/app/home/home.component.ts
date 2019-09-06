@@ -92,9 +92,9 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router) {
     // If the user nagivated to the game page by himself go to start menu
-    // if (this.router.getCurrentNavigation().extras.replaceUrl) {
-    //   this.router.navigate(['/startmenu']);
-    // }
+    if (this.router.getCurrentNavigation().extras.replaceUrl) {
+      this.router.navigate(['/startmenu']);
+    }
 
     // Window
     this.initialWidth = 1920;

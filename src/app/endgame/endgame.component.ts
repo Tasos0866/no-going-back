@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -37,11 +37,6 @@ export class EndgameComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.resizeText();
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
     this.resizeText();
   }
 
