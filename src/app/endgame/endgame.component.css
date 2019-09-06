@@ -4,10 +4,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(82, 179, 179); 
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    background: linear-gradient(42deg, #8bf5c3, #32a3e3, #c5f239);
+    background-size: 600% 600%;
+    
+    -webkit-animation: AnimationName 26s ease infinite;
+    -moz-animation: AnimationName 26s ease infinite;
+    animation: AnimationName 26s ease infinite;
+    
 }
 
 svg {
@@ -37,4 +43,20 @@ svg {
     display: inline-block;
     margin-top: 5px;
     color: red;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 96%}
+    50%{background-position:100% 5%}
+    100%{background-position:0% 96%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 96%}
+    50%{background-position:100% 5%}
+    100%{background-position:0% 96%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 96%}
+    50%{background-position:100% 5%}
+    100%{background-position:0% 96%}
 }
