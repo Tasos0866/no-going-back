@@ -36,6 +36,8 @@ export class HomeComponent implements OnInit {
   enemySpeedYAt1920: number;
   enemySpeedX: number;
   enemySpeedY: number;
+  enemyOldPositionX: number;
+  enemyOldPositionY: number;
 
   // Timer
   minutes: number;
@@ -122,6 +124,8 @@ export class HomeComponent implements OnInit {
     this.enemySpeedYAt1920 = 0.5;
     this.enemySpeedX = this.enemySpeedXAt1920 * this.speedAdjustment;
     this.enemySpeedY = this.enemySpeedYAt1920 * this.speedAdjustment;
+    this.enemyOldPositionX = 0;
+    this.enemyOldPositionY = 0;
 
     // Timer
     this.minutes = 0;
@@ -209,6 +213,9 @@ export class HomeComponent implements OnInit {
     this.gameSubscription = gameInterval.subscribe(n => {
       // Enemy follows the character
       this.followCharacter();
+
+      // Rotate the enemy image depending on the direction it is heading
+      this.rotateEnemy();
 
       // Check for character - enemy collisions
       this.checkCharacterEnemyCollisions();
@@ -504,18 +511,34 @@ export class HomeComponent implements OnInit {
 
   followCharacter() {
     if (this.positionY > this.enemyPositionY) {
+      // Keep the old position values
+      this.enemyOldPositionX = this.enemyOldPositionX;
+      this.enemyOldPositionY = this.enemyPositionY;
+      // Update the position
       this.enemyPositionY = this.enemyPositionY + this.enemySpeedY;
     }
 
     if (this.positionY < this.enemyPositionY) {
+      // Keep the old position values
+      this.enemyOldPositionX = this.enemyOldPositionX;
+      this.enemyOldPositionY = this.enemyPositionY;
+      // Update the position
       this.enemyPositionY = this.enemyPositionY - this.enemySpeedY;
     }
 
     if (this.positionX > this.enemyPositionX) {
+      // Keep the old position values
+      this.enemyOldPositionX = this.enemyOldPositionX;
+      this.enemyOldPositionY = this.enemyPositionY;
+      // Update the position
       this.enemyPositionX = this.enemyPositionX + this.enemySpeedX;
     }
 
     if (this.positionX < this.enemyPositionX) {
+      // Keep the old position values
+      this.enemyOldPositionX = this.enemyOldPositionX;
+      this.enemyOldPositionY = this.enemyPositionY;
+      // Update the position
       this.enemyPositionX = this.enemyPositionX - this.enemySpeedX;
     }
 
@@ -538,5 +561,9 @@ export class HomeComponent implements OnInit {
           this.collisionConsequences();
       }
     }
+  }
+
+  rotateEnemy() {
+    // TODO
   }
 }
