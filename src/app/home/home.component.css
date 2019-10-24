@@ -1,4 +1,4 @@
-.container {
+.home-container {
   position: absolute;
   background-color: #77e477;
   display: flex;
@@ -54,7 +54,9 @@
 
 .enemy {
   position: absolute;
-  background-color: yellow;
+  background: url("../../assets/img/missile.svg");
+  background-repeat: no-repeat;
+  background-size: auto;
 }
 
 @keyframes animateCharacterBig {

@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
   enemySpeedY: number;
   enemyOldPositionX: number;
   enemyOldPositionY: number;
+  enemyDirection: string;
 
   // Timer
   minutes: number;
@@ -116,8 +117,8 @@ export class HomeComponent implements OnInit {
     this.charSpeed =  this.charSpeedAt1920 * this.speedAdjustment;
 
     // Enemy
-    this.enemyWidth = 60;
-    this.enemyHeight = 60;
+    this.enemyWidth = 38;
+    this.enemyHeight = 100;
     this.enemyPositionX = 10;
     this.enemyPositionY = window.innerHeight - 80;
     this.enemySpeedXAt1920 = 0.8;
@@ -126,6 +127,7 @@ export class HomeComponent implements OnInit {
     this.enemySpeedY = this.enemySpeedYAt1920 * this.speedAdjustment;
     this.enemyOldPositionX = 0;
     this.enemyOldPositionY = 0;
+    this.enemyDirection = "south";
 
     // Timer
     this.minutes = 0;
@@ -178,13 +180,13 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    // If the window is smaller than ~1350px display the small chracter & enemy
-    if (this.windowWidthRatio < 0.703) {
+    // If the window is smaller than ~1024px display the small chracter & enemy
+    if (this.windowWidthRatio < 0.533) {
       this.charWidth = 20;
       this.charHeight = 32;
       this.setClass('character-big', 'character-small');
-      this.enemyWidth = 30;
-      this.enemyHeight = 30;
+      this.enemyWidth = 14;
+      this.enemyHeight = 37;
     }
     this.roadPositionLeft = this.getRoadOffsetLeft();
 
@@ -215,16 +217,16 @@ export class HomeComponent implements OnInit {
       this.followCharacter();
 
       // Rotate the enemy image depending on the direction it is heading
-      this.rotateEnemy();
+      //this.rotateEnemy();
 
       // Check for character - enemy collisions
       this.checkCharacterEnemyCollisions();
 
       // Check for character - car collisions
-     //////////// this.checkForCollisions();
+     //////////////this.checkForCollisions();
 
       // Update the positions of the cars
-      //////////////// this.updateCarsPosition();
+      //////////this.updateCarsPosition();
 
       // Check if the cars have reached the bottom of the screen
       if (this.carPositionY < -(this.carHeight)) {
@@ -316,19 +318,19 @@ export class HomeComponent implements OnInit {
     this.enemySpeedX = this.enemySpeedXAt1920 * this.speedAdjustment;
     this.enemySpeedY = this.enemySpeedYAt1920 * this.speedAdjustment;
 
-    // If the window is smaller than ~1350px display the small chracter & enemy
-    if (this.windowWidthRatio < 0.703) {
+    // If the window is smaller than ~1024px display the small chracter & enemy
+    if (this.windowWidthRatio < 0.533) {
       this.charWidth = 20;
       this.charHeight = 32;
       this.setClass('character-big', 'character-small');
-      this.enemyWidth = 30;
-      this.enemyHeight = 30;
+      this.enemyWidth = 14;
+      this.enemyHeight = 37;
     } else {
       this.charWidth = 49;
       this.charHeight = 80;
       this.setClass('character-small', 'character-big');
-      this.enemyWidth = 60;
-      this.enemyHeight = 60;
+      this.enemyWidth = 38;
+      this.enemyHeight = 100;
     }
 
     // ** Keep the cars inside the road  ** \\
@@ -514,7 +516,7 @@ export class HomeComponent implements OnInit {
       // Keep the old position values
       this.enemyOldPositionX = this.enemyOldPositionX;
       this.enemyOldPositionY = this.enemyPositionY;
-      // Update the position
+      // Update the enemy 's position
       this.enemyPositionY = this.enemyPositionY + this.enemySpeedY;
     }
 
@@ -522,7 +524,7 @@ export class HomeComponent implements OnInit {
       // Keep the old position values
       this.enemyOldPositionX = this.enemyOldPositionX;
       this.enemyOldPositionY = this.enemyPositionY;
-      // Update the position
+      // Update the enemy 's position
       this.enemyPositionY = this.enemyPositionY - this.enemySpeedY;
     }
 
@@ -530,7 +532,7 @@ export class HomeComponent implements OnInit {
       // Keep the old position values
       this.enemyOldPositionX = this.enemyOldPositionX;
       this.enemyOldPositionY = this.enemyPositionY;
-      // Update the position
+      // Update the enemy 's position
       this.enemyPositionX = this.enemyPositionX + this.enemySpeedX;
     }
 
@@ -538,7 +540,7 @@ export class HomeComponent implements OnInit {
       // Keep the old position values
       this.enemyOldPositionX = this.enemyOldPositionX;
       this.enemyOldPositionY = this.enemyPositionY;
-      // Update the position
+      // Update the enemy 's position
       this.enemyPositionX = this.enemyPositionX - this.enemySpeedX;
     }
 
@@ -564,6 +566,5 @@ export class HomeComponent implements OnInit {
   }
 
   rotateEnemy() {
-    // TODO
   }
 }
