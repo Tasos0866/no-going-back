@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
   enemyOldPositionX: number;
   enemyOldPositionY: number;
   enemyDirection: string;
+  enemyDirectionDegrees: number;
 
   // Timer
   minutes: number;
@@ -127,7 +128,7 @@ export class HomeComponent implements OnInit {
     this.enemySpeedY = this.enemySpeedYAt1920 * this.speedAdjustment;
     this.enemyOldPositionX = 0;
     this.enemyOldPositionY = 0;
-    this.enemyDirection = "south";
+    this.enemyDirection = 'rotate(0deg)';
 
     // Timer
     this.minutes = 0;
@@ -216,17 +217,14 @@ export class HomeComponent implements OnInit {
       // Enemy follows the character
       this.followCharacter();
 
-      // Rotate the enemy image depending on the direction it is heading
-      //this.rotateEnemy();
-
       // Check for character - enemy collisions
       this.checkCharacterEnemyCollisions();
 
       // Check for character - car collisions
-     //////////////this.checkForCollisions();
+      this.checkForCollisions();
 
       // Update the positions of the cars
-      //////////this.updateCarsPosition();
+      this.updateCarsPosition();
 
       // Check if the cars have reached the bottom of the screen
       if (this.carPositionY < -(this.carHeight)) {
@@ -311,8 +309,7 @@ export class HomeComponent implements OnInit {
     this.charSpeed = this.charSpeedAt1920 * this.speedAdjustment;
 
     // Move enemy to initial position
-    this.enemyPositionX = 10;
-    this.enemyPositionY = window.innerHeight - 80;
+    this.enemyInitialPosition();
 
     // Adjust the enemy 's speed depending on the screen width to height ratio
     this.enemySpeedX = this.enemySpeedXAt1920 * this.speedAdjustment;
@@ -534,6 +531,8 @@ export class HomeComponent implements OnInit {
       this.enemyOldPositionY = this.enemyPositionY;
       // Update the enemy 's position
       this.enemyPositionX = this.enemyPositionX + this.enemySpeedX;
+      // Rotate the enemy image depending on the direction it is heading
+      this.rotateEnemy();
     }
 
     if (this.positionX < this.enemyPositionX) {
@@ -542,14 +541,15 @@ export class HomeComponent implements OnInit {
       this.enemyOldPositionY = this.enemyPositionY;
       // Update the enemy 's position
       this.enemyPositionX = this.enemyPositionX - this.enemySpeedX;
+      // Rotate the enemy image depending on the direction it is heading
+      this.rotateEnemy();
     }
 
     // Check if the enemy is too close to player spawn
     if (this.enemyPositionX < this.charWidth + this.charSpeed &&
       this.enemyPositionY - window.innerHeight / 2 < this.charHeight + this.charSpeed) {
       // Move enemy near the initial position
-      this.enemyPositionX = 10;
-      this.enemyPositionY = window.innerHeight - this.enemyHeight * 2;
+      this.enemyInitialPosition();
     }
   }
 
@@ -566,5 +566,13 @@ export class HomeComponent implements OnInit {
   }
 
   rotateEnemy() {
+    let angle:Number = Math.atan2(this.positionY - this.enemyPositionY, this.positionX - this.enemyPositionX) * (180 / Math.PI);
+    this.enemyDirection = 'rotate(' + (-angle - 90) + 'deg)';
+  }
+
+  enemyInitialPosition() {
+    this.enemyPositionX = 10;
+    this.enemyPositionY = window.innerHeight - this.enemyHeight;
+    this.rotateEnemy();
   }
 }
