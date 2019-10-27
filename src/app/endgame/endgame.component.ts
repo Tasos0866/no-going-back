@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ResizedEvent } from 'angular-resize-event';
+import domtoimage from 'dom-to-image';
 
 @Component({
   selector: 'app-endgame',
@@ -56,5 +57,17 @@ export class EndgameComponent implements OnInit {
 
   onResized(event: ResizedEvent) {
     this.resizeText();
+  }
+
+  downloadImage() {
+    const node = document.getElementsByClassName('endgame-container')[0];
+
+    domtoimage.toJpeg(node, { quality: 1 })
+      .then((dataUrl) => {
+        const link = document.createElement('a');
+        link.download = 'score.jpeg';
+        link.href = dataUrl;
+        link.click();
+      });
   }
 }

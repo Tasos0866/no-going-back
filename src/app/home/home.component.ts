@@ -115,7 +115,7 @@ export class HomeComponent implements OnInit {
     this.positionX = 10;
     this.positionY = (window.innerHeight - this.charHeight) / 2;
     this.speedAdjustment = this.currentWidthToHeightRatio / this.normalWidthToHeightRatio;
-    this.charSpeed =  this.charSpeedAt1920 * this.speedAdjustment;
+    this.charSpeed = this.charSpeedAt1920 * this.speedAdjustment;
 
     // Enemy
     this.enemyWidth = 38;
@@ -200,7 +200,7 @@ export class HomeComponent implements OnInit {
       this.displayMilliseconds = this.addZero(this.milliseconds % 100);
       if (this.milliseconds % 100 === 0) {
         this.seconds = (this.seconds + 1);
-        this.displaySeconds = this.addZero(this.seconds  % 60);
+        this.displaySeconds = this.addZero(this.seconds % 60);
       }
 
       if (this.seconds % 60 === 0 && this.seconds !== 0 && (this.milliseconds + 100) % 6000 === 0) {
@@ -370,7 +370,7 @@ export class HomeComponent implements OnInit {
 
     // If the character and car2 are in the same y position
     if (this.positionY + this.charHeight > this.car2PositionY &&
-        this.positionY < this.car2PositionY + this.car2Height) {
+      this.positionY < this.car2PositionY + this.car2Height) {
       // Check for collision in the x axes
       if (this.checkCollisionX('car2')) {
         this.collisionConsequences();
@@ -379,7 +379,7 @@ export class HomeComponent implements OnInit {
 
     // If the character and car3 are in the same y position
     if (this.positionY + this.charHeight > this.car3PositionY &&
-        this.positionY < this.car3PositionY + this.car3Height) {
+      this.positionY < this.car3PositionY + this.car3Height) {
       // Check for collision in the x axes
       if (this.checkCollisionX('car3')) {
         this.collisionConsequences();
@@ -391,7 +391,7 @@ export class HomeComponent implements OnInit {
     if (this.positionX + this.charWidth - 10 > this.carPositionX + this.roadPositionLeft &&
       this.positionX < this.carPositionX + this.roadPositionLeft + this.carWidth &&
       vehicle === 'car1') {
-        return true;
+      return true;
     }
 
     if (this.positionX + this.charWidth - 10 > this.car2PositionX + this.roadPositionLeft &&
@@ -455,9 +455,9 @@ export class HomeComponent implements OnInit {
   }
 
   updateCarsPosition() {
-      this.carPositionY = this.carPositionY - this.carSpeed;
-      this.car2PositionY = this.car2PositionY - this.car2Speed;
-      this.car3PositionY = this.car3PositionY - this.car3Speed;
+    this.carPositionY = this.carPositionY - this.carSpeed;
+    this.car2PositionY = this.car2PositionY - this.car2Speed;
+    this.car3PositionY = this.car3PositionY - this.car3Speed;
   }
 
   generateNewCar(car: string) {
@@ -486,7 +486,7 @@ export class HomeComponent implements OnInit {
       this.car2PositionY = window.innerHeight + this.car2Height * this.car2StartDelay;
     }
 
-    if (car === 'car3')  {
+    if (car === 'car3') {
       // Set random speed and delay for car3
       this.car3StartDelay = this.randomInt(1, 3);
       this.car3Speed = randomSpeed;
@@ -560,13 +560,13 @@ export class HomeComponent implements OnInit {
       // Check for collision in the y axes
       if (this.positionX + this.charWidth - 10 > this.enemyPositionX &&
         this.positionX < this.enemyPositionX + this.enemyWidth) {
-          this.collisionConsequences();
+        this.collisionConsequences();
       }
     }
   }
 
   rotateEnemy() {
-    let angle:Number = Math.atan2(this.positionY - this.enemyPositionY, this.positionX - this.enemyPositionX) * (180 / Math.PI);
+    const angle: number = Math.atan2(this.positionY - this.enemyPositionY, this.positionX - this.enemyPositionX) * (180 / Math.PI);
     this.enemyDirection = 'rotate(' + (-angle - 90) + 'deg)';
   }
 
