@@ -1,4 +1,11 @@
-# No Going Back
+# No Going Back (mini game)
+
+
+Cross the road as fast as you can and challenge your friends to beat you! 
+
+Move carefully and do not look back! You can try the game [here](https://tasos0866.github.io/no-going-back/)!
+
+---
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
 
